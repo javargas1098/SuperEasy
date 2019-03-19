@@ -16,8 +16,8 @@ public class SuperEasyAPIController {
 	@Autowired
 	private SuperEasyServices superEasyServices;
 	
-	@PostMapping("{name}")
-	public ResponseEntity<?> postUser(@PathVariable String name, @RequestBody User user) {
+	@PostMapping("user")
+	public ResponseEntity<?> postUser(@RequestBody User user) {
 
 		superEasyServices.createUser(user);
 

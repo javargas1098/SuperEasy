@@ -4,22 +4,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 public class User {
-	int jairitos, jairitosCongelados, jairitosBenefit;
-	String name, number, addres;
+	private int jairitos, jairitosCongelados, jairitosBenefit;
+	private String name, number, addres, password;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	long id;
+	private long id;
 
 	public User() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public User(long id, String name, String number, String addres, int jairitos, int jairitosCongelados,
-			int jairitosBenefit) {
+			int jairitosBenefit, String password) {
 
 		this.id = id;
 		this.name = name;
@@ -28,7 +29,16 @@ public class User {
 		this.jairitos = jairitos;
 		this.jairitosBenefit = jairitosBenefit;
 		this.jairitosCongelados = jairitosCongelados;
+		this.password = password;
 
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getAddres() {

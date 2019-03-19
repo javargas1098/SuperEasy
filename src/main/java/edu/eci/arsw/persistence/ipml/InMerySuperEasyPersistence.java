@@ -12,14 +12,14 @@ import edu.eci.arsw.repository.UserRepository;
 @Component("superEasyPersistence")
 public class InMerySuperEasyPersistence implements SuperEasyPersistence {
 
-	@Autowired
-	BiddingRepository br;
+//	@Autowired
+//	BiddingRepository br;
+//
+//	@Autowired
+//	SubastasReposiroty sr;
 
 	@Autowired
-	SubastasReposiroty sr;
-
-	@Autowired
-	UserRepository ur;
+	private UserRepository ur;
 
 	@Override
 	public void createUser(User user) {

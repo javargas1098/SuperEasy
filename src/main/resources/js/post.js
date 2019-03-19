@@ -28,7 +28,7 @@ $(document).ready(
 					success : function(result) {
 						if (result.status == "success") {
 							$("#postResultDiv").html(
-									"" + result.data.bookName
+									"" + result.data.username
 											+ "Usuario agregado! <br>");
 						} else {
 							$("#postResultDiv").html("<strong>Error</strong>");

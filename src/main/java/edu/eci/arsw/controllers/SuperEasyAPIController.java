@@ -15,14 +15,9 @@ public class SuperEasyAPIController {
 	
 	@Autowired
 	private SuperEasyServices superEasyServices;
-	
-<<<<<<< HEAD
+
 	@PostMapping("user")
 	public ResponseEntity<?> postUser(@RequestBody User user) {
-=======
-	@PostMapping("/safeUser")
-	public ResponseEntity<?> postUser(@PathVariable String name, @RequestBody User user) {
->>>>>>> 455769d74c5b8e5b666496e8e752383bd0b2313c
 
 		superEasyServices.createUser(user);
 

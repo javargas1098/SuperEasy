@@ -9,7 +9,7 @@ import edu.eci.arsw.repository.BiddingRepository;
 import edu.eci.arsw.repository.SubastasReposiroty;
 import edu.eci.arsw.repository.UserRepository;
 
-@Component("sep")
+@Component("superEasyPersistence")
 public class InMerySuperEasyPersistence implements SuperEasyPersistence {
 
 	@Autowired

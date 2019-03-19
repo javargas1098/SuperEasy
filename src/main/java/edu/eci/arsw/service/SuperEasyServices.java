@@ -14,7 +14,7 @@ public class SuperEasyServices {
 
 	public void createUser(User user) {
 		
-		
+		superEasyPersistence.createUser(user);
 		
 	}
 	

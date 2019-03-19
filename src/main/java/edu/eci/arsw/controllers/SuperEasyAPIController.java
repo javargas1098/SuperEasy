@@ -11,7 +11,7 @@ import edu.eci.arsw.service.SuperEasyServices;
 @RestController
 @RequestMapping(value = "/superEasy")
 
-public class SuperEasyController {
+public class SuperEasyAPIController {
 	
 	@Autowired
 	private SuperEasyServices superEasyServices;

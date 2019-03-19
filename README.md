@@ -1,6 +1,6 @@
 # Proyecto ARSW
 
-A continuación se presentan los modelos del proyewcto
+A continuación se presentan los modelos del proyecto
 ## Modelos
 
 ### Base de datos:

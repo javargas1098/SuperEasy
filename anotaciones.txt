@@ -18,3 +18,6 @@ spring.jpa.generate-ddl=true
 
 - @RepositoryRestResource --> Equivalente al DAO
 
+
+
+curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/superEasy/user -d '{"name":"Sebastian Goenaga", "addres":"calle", "number":"3106553233","jairitos":"20","jairitosBenefit":"calle","jairitosCongelados":"calle","password":"pwd",}'

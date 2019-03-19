@@ -1,0 +1,20 @@
+https://grokonez.com/java-integration/access-mysql-database-spring-data-rest-application#III_Sourcecode
+
+- Anotación @Entity : Define que una clase puede ser mapeada a una tabla
+
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+private long id
+
+
+- Parametros para JPA:
+
+application.properties
+
+spring.datasource.url=jdbc:mysql://localhost:3306/testdb
+spring.datasource.username=root
+spring.datasource.password=12345
+spring.jpa.generate-ddl=true
+
+- @RepositoryRestResource --> Equivalente al DAO
+

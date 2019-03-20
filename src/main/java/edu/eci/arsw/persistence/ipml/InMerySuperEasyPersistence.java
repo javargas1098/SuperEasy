@@ -5,25 +5,25 @@ import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.model.User;
 import edu.eci.arsw.persistence.SuperEasyPersistence;
-import edu.eci.arsw.repository.BiddingRepository;
-import edu.eci.arsw.repository.SubastasReposiroty;
+//import edu.eci.arsw.repository.BiddingRepository;
+//import edu.eci.arsw.repository.SubastasReposiroty;
 import edu.eci.arsw.repository.UserRepository;
 
 @Component("superEasyPersistence")
 public class InMerySuperEasyPersistence implements SuperEasyPersistence {
 
-	@Autowired
-	BiddingRepository br;
+//	@Autowired
+//	BiddingRepository br;
+//
+//	@Autowired
+//	SubastasReposiroty sr;
 
-	@Autowired
-	SubastasReposiroty sr;
-
-	@Autowired
-	UserRepository ur;
+	//@Autowired
+	//UserRepository ur;
 
 	@Override
 	public void createUser(User user) {
-		ur.save(user);
+		//ur.save(user);
 		
 	}
 

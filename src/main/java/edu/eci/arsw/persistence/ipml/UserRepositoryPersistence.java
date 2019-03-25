@@ -31,22 +31,35 @@ public class UserRepositoryPersistence implements UserRepository{
 	@Value("${spring.datasource.password}")
 	private String dbPassword;
 	
-	@Autowired
+	
 	private DataSource userdataSource;
 	
 	
 
+	
+
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll()  {
+		try {
+			if(userdataSource==null) {
+				userdataSource= gendata();
+			}
+			
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+		
 		String query= "SELECT * FROM users;";
 		List<User> users=new ArrayList<User>();
-		try (Connection connection = userdataSource.getConnection(dbUsername,dbPassword)) {
+		try (Connection connection = userdataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				User user = new User();
 				user.setName(rs.getString("name"));
-				user.setId(Long.parseLong(rs.getString("id")));
+				user.setId(Long.parseLong(rs.getString("id_users")));
 				user.setEmail(rs.getString("email"));
 				user.setNumber(rs.getString("phone"));
 				user.setJairitos(Integer.parseInt(rs.getString("jairitos")));
@@ -104,13 +117,15 @@ public class UserRepositoryPersistence implements UserRepository{
 		// TODO Auto-generated method stub
 		
 	}
-	@Bean
-	public DataSource userdataSource() throws SQLException{
+	
+	private DataSource gendata() throws SQLException{
 		if (dbUrl == null || dbUrl.isEmpty()) {
 			return new HikariDataSource();
 		} else {
 			HikariConfig config = new HikariConfig();
 			config.setJdbcUrl(dbUrl);
+			config.setUsername(dbUsername);
+			config.setPassword(dbPassword);
 			return new HikariDataSource(config);
 		}
 	}

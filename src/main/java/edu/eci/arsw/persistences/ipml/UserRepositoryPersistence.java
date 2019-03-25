@@ -1,4 +1,4 @@
-package edu.eci.arsw.persistence.ipml;
+package edu.eci.arsw.persistences.ipml;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +10,10 @@ import java.util.UUID;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+
+import edu.eci.arsw.model.User;
+import edu.eci.arsw.persistences.repositories.IUserRepository;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +23,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import edu.eci.arsw.model.User;
-import edu.eci.arsw.persistence.repository.UserRepository;
 
 @Component
 @Qualifier("UserRepositoryPersistence")
-public class UserRepositoryPersistence implements UserRepository {
+public class UserRepositoryPersistence implements IUserRepository {
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
 	@Value("${spring.datasource.username}")

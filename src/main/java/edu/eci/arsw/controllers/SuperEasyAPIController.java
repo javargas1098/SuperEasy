@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import edu.eci.arsw.model.User;
-import edu.eci.arsw.service.SuperEasyServices;
+import edu.eci.arsw.services.SuperEasyServices;
 
 @RestController
 @RequestMapping(value = "/superEasy")

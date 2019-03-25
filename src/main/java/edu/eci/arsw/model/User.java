@@ -3,28 +3,19 @@ package edu.eci.arsw.model;
 import java.io.Serializable;
 
 
-
-
 public class User implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	public int jairitos, jairitosCongelados, jairitosBenefit;
 	public  String name, number, addres, password,email;
 
 	
 	private long id;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public User() {
+	
+public User() {
 		
 	}
 
@@ -40,6 +31,14 @@ public class User implements Serializable{
 		this.password = password;
 		this.email=email;
 
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public String getPassword() {

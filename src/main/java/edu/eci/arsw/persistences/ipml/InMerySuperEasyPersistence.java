@@ -1,4 +1,4 @@
-package edu.eci.arsw.persistence.ipml;
+package edu.eci.arsw.persistences.ipml;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.model.User;
-import edu.eci.arsw.persistence.SuperEasyPersistence;
+import edu.eci.arsw.persistences.SuperEasyPersistence;
+import edu.eci.arsw.persistences.repositories.IUserRepository;
 
-import edu.eci.arsw.persistence.repository.UserRepository;
 
 @Component("superEasyPersistence")
 public class InMerySuperEasyPersistence implements SuperEasyPersistence {
@@ -20,7 +20,7 @@ public class InMerySuperEasyPersistence implements SuperEasyPersistence {
 //	SubastasReposiroty sr;
 
 	@Autowired
-	private UserRepository ur;
+	private IUserRepository ur;
 
 	@Override
 	public void createUser(User user) {

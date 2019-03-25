@@ -1,4 +1,4 @@
-package edu.eci.arsw.persistence.repository;
+package edu.eci.arsw.persistences.repositories;
 
 import java.io.Serializable;
 import java.util.List;

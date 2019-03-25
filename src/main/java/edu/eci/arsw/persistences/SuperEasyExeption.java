@@ -1,4 +1,4 @@
-package edu.eci.arsw.persistence;
+package edu.eci.arsw.persistences;
 
 public class SuperEasyExeption  extends Exception{
 

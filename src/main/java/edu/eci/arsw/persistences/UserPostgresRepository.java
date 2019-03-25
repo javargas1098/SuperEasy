@@ -88,11 +88,16 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Override
-	public void remove(Long id) {
+	public void remove(String id) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public User getUserByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Bean
 	private DataSource dataSource() throws SQLException{
@@ -105,12 +110,6 @@ public class UserPostgresRepository implements IUserRepository {
 			config.setPassword(dbPassword);
 			return new HikariDataSource(config);
 		}
-	}
-
-	@Override
-	public User GetUserByName(String username) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

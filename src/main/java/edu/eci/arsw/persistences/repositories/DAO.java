@@ -9,6 +9,6 @@ public interface DAO <T	extends Serializable, PK> {
     public PK save(T entity);
     public void update(T entity);
     public void delete(T o);
-    public void remove(Long id);
+    public void remove(String id);
 
 }

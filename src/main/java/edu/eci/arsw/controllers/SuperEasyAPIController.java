@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import edu.eci.arsw.model.User;
-import edu.eci.arsw.services.SuperEasyServices;
+import edu.eci.arsw.services.contracts.IUserServices;
 
 @RestController
 @RequestMapping(value = "/superEasy")
@@ -17,14 +17,14 @@ import edu.eci.arsw.services.SuperEasyServices;
 public class SuperEasyAPIController {
 	
 	@Autowired
-	private SuperEasyServices superEasyServices;
+	private IUserServices userServicies;
 
 	
 	
 	@RequestMapping(value= "/user" , method= RequestMethod.GET)
 	public ResponseEntity<?> GetAllUsers(){
 		try {
-			return new ResponseEntity<>(superEasyServices.getUsers(),HttpStatus.OK);
+			return new ResponseEntity<>(userServicies.list(),HttpStatus.OK);
 		}
 		catch(Exception e){
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
@@ -36,7 +36,7 @@ public class SuperEasyAPIController {
 	@PostMapping("{user}")
 	public ResponseEntity<?> postUser(@RequestBody User user) {
 
-		superEasyServices.createUser(user);
+		userServicies.create(user);
 
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}

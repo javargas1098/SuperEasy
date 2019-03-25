@@ -1,17 +1,58 @@
 package edu.eci.arsw.services;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.persistences.repositories.IUserRepository;
 import edu.eci.arsw.services.contracts.IUserServices;
+import edu.eci.arsw.model.User;
 
 @Component
 public class UserServices implements IUserServices{
 	
-	@Autowired
-    @Qualifier("UserPostgresRepository")
-    private IUserRepository userRepository;
+	 @Autowired
+	    @Qualifier("UserPostgresRepository")
+	    private IUserRepository userRepository;
+
+	    @Override
+	    public List<User> list() {
+	        return userRepository.findAll();
+	    }
+
+	    @Override
+	    public User create(User user) {
+	        if(null == user.getEmail())
+	            throw new RuntimeException("Id invalid");
+	        else if(userRepository.find(user.getId()) != null)
+	            throw new RuntimeException("The user already exists");
+	        else
+	            userRepository.save(user);
+	        return user;
+	    }
+
+	    @Override
+	    public User get(String name) {
+	        return userRepository.getUserByEmail(name);
+	    }
+
+		@Override
+		public void deleteUser(User user) {
+			
+			userRepository.delete(user);
+		}
+
+		@Override
+		public void removeUser(String id) {
+			userRepository.remove(id);
+		}
+		
+		@Override
+		public void updateUser(User user) {
+			userRepository.update(user);
+		}
 	
 }

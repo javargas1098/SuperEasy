@@ -1,5 +1,8 @@
 package edu.eci.arsw.model;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,20 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-public class User {
+public class User implements Serializable{
 	private int jairitos, jairitosCongelados, jairitosBenefit;
-	private String name, number, addres, password;
+	private String name, number, addres, password,email;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public User() {
 		
 	}
 
 	public User(long id, String name, String number, String addres, int jairitos, int jairitosCongelados,
-			int jairitosBenefit, String password) {
+			int jairitosBenefit, String password,String email) {
 
 		this.id = id;
 		this.name = name;
@@ -30,6 +41,7 @@ public class User {
 		this.jairitosBenefit = jairitosBenefit;
 		this.jairitosCongelados = jairitosCongelados;
 		this.password = password;
+		this.email=email;
 
 	}
 	
@@ -94,7 +106,8 @@ public class User {
 	}
 
 	public void setId(long id) {
-		this.id = id;
+		this.id=id;
 	}
 
+	
 }

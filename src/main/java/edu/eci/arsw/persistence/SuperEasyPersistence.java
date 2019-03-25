@@ -1,5 +1,7 @@
 package edu.eci.arsw.persistence;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.model.User;
@@ -8,5 +10,7 @@ import edu.eci.arsw.model.User;
 public interface SuperEasyPersistence {
 	
 	public void createUser (User user);
+
+	
 	
 }

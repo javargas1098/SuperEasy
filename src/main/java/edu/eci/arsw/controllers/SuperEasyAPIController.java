@@ -1,5 +1,8 @@
 package edu.eci.arsw.controllers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +26,17 @@ public class SuperEasyAPIController {
 
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-
+	
+	@RequestMapping(value= "/user" , method= RequestMethod.GET)
+	public ResponseEntity<?> GetAllUsers(){
+		try {
+			return new ResponseEntity<>(superEasyServices.getUsers(),HttpStatus.OK);
+		}
+		catch(Exception e){
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("Error no Users Found",HttpStatus.NOT_FOUND);
+			
+		}
+		
+	}
 }

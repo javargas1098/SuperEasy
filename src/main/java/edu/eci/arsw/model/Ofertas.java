@@ -1,43 +1,56 @@
 package edu.eci.arsw.model;
 
 
-public class Ofertas {
-	int oferta,tipopago,subasta,usuariosid;
+public class Ofertas {;
+
+	long ofertaID;
+	TipoDePago  tipoDePago;
+	Auction auction;
+	User user;
 	
 	public Ofertas() {
 	}
-	public Ofertas(int oferta,int tipoPago,int subasta,int usuariosid) {
-		this.oferta=oferta;
-		this.usuariosid=usuariosid;
-		this.tipopago=tipoPago;
-		this.subasta=subasta;
-		
+
+	public Ofertas(long ofertaID, TipoDePago tipoDePago, Auction auction, User user) {
+		super();
+		this.ofertaID = ofertaID;
+		this.tipoDePago = tipoDePago;
+		this.auction = auction;
+		this.user = user;
+	}
+
+	public long getOfertaID() {
+		return ofertaID;
+	}
+
+	public void setOfertaID(long ofertaID) {
+		this.ofertaID = ofertaID;
+	}
+
+	public TipoDePago getTipoDePago() {
+		return tipoDePago;
+	}
+
+	public void setTipoDePago(TipoDePago tipoDePago) {
+		this.tipoDePago = tipoDePago;
+	}
+
+	public Auction getAuction() {
+		return auction;
+	}
+
+	public void setAuction(Auction auction) {
+		this.auction = auction;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	
-	public int getOferta() {
-		return oferta;
-	}
-	public void setOferta(int oferta) {
-		this.oferta = oferta;
-	}
-	public int getTipopago() {
-		return tipopago;
-	}
-	public void setTipopago(int tipopago) {
-		this.tipopago = tipopago;
-	}
-	public int getSubasta() {
-		return subasta;
-	}
-	public void setSubasta(int subasta) {
-		this.subasta = subasta;
-	}
-	public int getUsuariosid() {
-		return usuariosid;
-	}
-	public void setUsuariosid(int usuariosid) {
-		this.usuariosid = usuariosid;
-	}
 
 }

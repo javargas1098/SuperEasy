@@ -7,7 +7,8 @@ import edu.eci.arsw.model.*;
 public class Auction {
 
 	List<User> bidders;
-	int idSubasta, id_Seller, precioSugerido;
+	int id_Seller, precioSugerido;
+	long idSubasta;
 	EstadoSubasta estado;
 	Date horaIni, horaFin;
 
@@ -15,7 +16,7 @@ public class Auction {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Auction(int idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, int id_seller, int precioSugerido) {
+	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, int id_seller, int precioSugerido) {
 
 		this.estado = estado;
 		this.horaFin = horaFin;
@@ -34,7 +35,7 @@ public class Auction {
 		this.bidders = bidders;
 	}
 
-	public int getIdSubasta() {
+	public long getIdSubasta() {
 		return idSubasta;
 	}
 

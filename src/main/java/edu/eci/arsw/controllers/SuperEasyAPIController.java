@@ -19,13 +19,7 @@ public class SuperEasyAPIController {
 	@Autowired
 	private SuperEasyServices superEasyServices;
 
-	@PostMapping("user")
-	public ResponseEntity<?> postUser(@RequestBody User user) {
-
-		superEasyServices.createUser(user);
-
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
+	
 	
 	@RequestMapping(value= "/user" , method= RequestMethod.GET)
 	public ResponseEntity<?> GetAllUsers(){
@@ -38,5 +32,12 @@ public class SuperEasyAPIController {
 			
 		}
 		
+	}
+	@PostMapping("{user}")
+	public ResponseEntity<?> postUser(@RequestBody User user) {
+
+		superEasyServices.createUser(user);
+
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 }

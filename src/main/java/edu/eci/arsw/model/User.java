@@ -1,21 +1,19 @@
 package edu.eci.arsw.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
+
+
 public class User implements Serializable{
-	private int jairitos, jairitosCongelados, jairitosBenefit;
-	private String name, number, addres, password,email;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public int jairitos, jairitosCongelados, jairitosBenefit;
+	public  String name, number, addres, password,email;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	
 	private long id;
 
 	public String getEmail() {
@@ -30,12 +28,11 @@ public class User implements Serializable{
 		
 	}
 
-	public User(long id, String name, String number, String addres, int jairitos, int jairitosCongelados,
+	public User(long id, String name, String number, int jairitos, int jairitosCongelados,
 			int jairitosBenefit, String password,String email) {
 
 		this.id = id;
 		this.name = name;
-		this.addres = addres;
 		this.number = number;
 		this.jairitos = jairitos;
 		this.jairitosBenefit = jairitosBenefit;

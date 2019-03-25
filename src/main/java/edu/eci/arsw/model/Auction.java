@@ -1,6 +1,8 @@
 package edu.eci.arsw.model;
 
 import java.util.*;
+import edu.eci.arsw.model.*;
+
 
 public class Auction {
 

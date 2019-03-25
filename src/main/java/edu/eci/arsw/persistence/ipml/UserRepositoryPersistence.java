@@ -21,38 +21,33 @@ import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.model.User;
 import edu.eci.arsw.persistence.repository.UserRepository;
+
 @Component
 @Qualifier("UserRepositoryPersistence")
-public class UserRepositoryPersistence implements UserRepository{
+public class UserRepositoryPersistence implements UserRepository {
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
 	@Value("${spring.datasource.username}")
 	private String dbUsername;
 	@Value("${spring.datasource.password}")
 	private String dbPassword;
-	
-	
-	private DataSource userdataSource;
-	
-	
 
-	
+	private DataSource userdataSource;
 
 	@Override
-	public List<User> findAll()  {
+	public List<User> findAll() {
 		try {
-			if(userdataSource==null) {
-				userdataSource= gendata();
+			if (userdataSource == null) {
+				userdataSource = gendata();
 			}
-			
-		}
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		}
-		
-		String query= "SELECT * FROM users;";
-		List<User> users=new ArrayList<User>();
+
+		String query = "SELECT * FROM users;";
+		List<User> users = new ArrayList<User>();
 		try (Connection connection = userdataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -73,7 +68,7 @@ public class UserRepositoryPersistence implements UserRepository{
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		}
-		
+
 	}
 
 	@Override
@@ -84,26 +79,44 @@ public class UserRepositoryPersistence implements UserRepository{
 
 	@Override
 	public Long save(User entity) {
+		try {
+			if (userdataSource == null) {
+				userdataSource = gendata();
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+		String query = "Insert into users(name,email,phone,password) VALUES(" + entity.getName() + ","
+				+ entity.getEmail() + "," + entity.getNumber() + "," + entity.getPassword() + ");";
 		// TODO Auto-generated method stub
-		return null;
+		try (Connection connection = userdataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			return entity.getId();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void update(User entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(User o) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void remove(Long id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -115,10 +128,10 @@ public class UserRepositoryPersistence implements UserRepository{
 	@Override
 	public void createUser(User usuario) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	private DataSource gendata() throws SQLException{
+
+	private DataSource gendata() throws SQLException {
 		if (dbUrl == null || dbUrl.isEmpty()) {
 			return new HikariDataSource();
 		} else {
@@ -129,7 +142,5 @@ public class UserRepositoryPersistence implements UserRepository{
 			return new HikariDataSource(config);
 		}
 	}
-	
-	
 
 }

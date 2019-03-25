@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.model.User;
 import edu.eci.arsw.persistence.SuperEasyPersistence;
-import edu.eci.arsw.persistence.repository.BiddingRepository;
-import edu.eci.arsw.persistence.repository.SubastasReposiroty;
+
 import edu.eci.arsw.persistence.repository.UserRepository;
 
 @Component("superEasyPersistence")

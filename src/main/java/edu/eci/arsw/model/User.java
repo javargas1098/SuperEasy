@@ -1,7 +1,10 @@
 package edu.eci.arsw.model;
 
 import java.io.Serializable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> a
 
 public class User implements Serializable{
 	/**

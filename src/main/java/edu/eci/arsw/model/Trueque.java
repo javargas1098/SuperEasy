@@ -1,13 +1,18 @@
 package edu.eci.arsw.model;
 
 public class Trueque extends TipoDePago {
-	int item;
-	Item trueque;
+	Item item;
+	TipoDePago tipoDePago;
 
-	public Trueque(int item, Item truque) {
-		this.item = item;
-		this.trueque = truque;
-
+	public Trueque() {
+	
 	}
 
+	public Trueque(Item item, TipoDePago tipoDePago) {
+		super();
+		this.item = item;
+		this.tipoDePago = tipoDePago;
+	}
+	
+	
 }

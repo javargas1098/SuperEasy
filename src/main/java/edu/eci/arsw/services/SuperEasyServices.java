@@ -1,4 +1,4 @@
-package edu.eci.arsw.service;
+package edu.eci.arsw.services;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import edu.eci.arsw.model.User;
-import edu.eci.arsw.persistence.SuperEasyPersistence;
-import edu.eci.arsw.persistence.ipml.UserRepositoryPersistence;
+import edu.eci.arsw.persistences.SuperEasyPersistence;
+import edu.eci.arsw.persistences.ipml.UserRepositoryPersistence;
 
 @Component
 public class SuperEasyServices {

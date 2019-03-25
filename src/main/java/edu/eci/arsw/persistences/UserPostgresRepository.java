@@ -1,5 +1,18 @@
-package edu.eci.arsw.persistences.ipml;
+package edu.eci.arsw.persistences;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import edu.eci.arsw.model.User;
+import edu.eci.arsw.persistences.repositories.IUserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,49 +21,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
-import edu.eci.arsw.model.User;
-import edu.eci.arsw.persistences.repositories.IUserRepository;
 @Component
-@Qualifier("UserRepositoryPersistence")
-public class UserRepositoryPersistence implements IUserRepository{
+@Qualifier("UserPostgresRepository")
+public class UserPostgresRepository implements IUserRepository {
+
 	@Value("${spring.datasource.url}")
 	private String dbUrl;
 	@Value("${spring.datasource.username}")
 	private String dbUsername;
 	@Value("${spring.datasource.password}")
 	private String dbPassword;
-	
-	
-	private DataSource userdataSource;
-	
 
+	@Autowired
+	private DataSource dataSource;
+	
 	@Override
 	public List<User> findAll()  {
-		try {
-			if(userdataSource==null) {
-				userdataSource= gendata();
-			}
-			
-		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
-		}
 		
 		String query= "SELECT * FROM users;";
 		List<User> users=new ArrayList<User>();
-		try (Connection connection = userdataSource.getConnection()) {
+		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -104,12 +94,13 @@ public class UserRepositoryPersistence implements IUserRepository{
 	}
 
 	@Override
-	public User GetUserByEmail(String username) {
+	public User GetUserByEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	private DataSource gendata() throws SQLException{
+	@Bean
+	private DataSource dataSource() throws SQLException{
 		if (dbUrl == null || dbUrl.isEmpty()) {
 			return new HikariDataSource();
 		} else {
@@ -120,7 +111,4 @@ public class UserRepositoryPersistence implements IUserRepository{
 			return new HikariDataSource(config);
 		}
 	}
-	
-	
-
 }

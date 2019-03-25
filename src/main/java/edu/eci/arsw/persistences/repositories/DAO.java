@@ -1,9 +1,9 @@
-package edu.eci.arsw.persistence.repository;
+package edu.eci.arsw.persistences.repositories;
 
 import java.io.Serializable;
 import java.util.List;
 
-public interface DAO <T	extends Serializable,PK> {
+public interface DAO <T	extends Serializable, PK> {
 	public List<T> findAll();
 	public T find(PK id);
     public PK save(T entity);

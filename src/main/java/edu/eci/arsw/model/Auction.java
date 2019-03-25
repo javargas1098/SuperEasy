@@ -2,18 +2,18 @@ package edu.eci.arsw.model;
 
 import java.util.*;
 
-public class auction {
+public class Auction {
 
 	List<User> bidders;
 	int idSubasta, id_Seller, precioSugerido;
-	estadoSubasta estado;
+	EstadoSubasta estado;
 	Date horaIni, horaFin;
 
-	public auction() {
+	public Auction() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public auction(int idSubasta, estadoSubasta estado, Date horaIni, Date horaFin, int id_seller, int precioSugerido) {
+	public Auction(int idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, int id_seller, int precioSugerido) {
 
 		this.estado = estado;
 		this.horaFin = horaFin;
@@ -40,11 +40,11 @@ public class auction {
 		this.idSubasta = idSubasta;
 	}
 
-	public estadoSubasta getEstado() {
+	public EstadoSubasta getEstado() {
 		return estado;
 	}
 
-	public void setEstado(estadoSubasta estado) {
+	public void setEstado(EstadoSubasta estado) {
 		this.estado = estado;
 	}
 

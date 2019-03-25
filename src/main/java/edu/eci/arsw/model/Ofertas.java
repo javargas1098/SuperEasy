@@ -1,8 +1,18 @@
 package edu.eci.arsw.model;
 
 
-public class ofertas {
+public class Ofertas {
 	int oferta,tipopago,subasta,usuariosid;
+	
+	public Ofertas() {
+	}
+	public Ofertas(int oferta,int tipoPago,int subasta,int usuariosid) {
+		this.oferta=oferta;
+		this.usuariosid=usuariosid;
+		this.tipopago=tipoPago;
+		this.subasta=subasta;
+		
+	}
 	
 	
 	public int getOferta() {
@@ -28,16 +38,6 @@ public class ofertas {
 	}
 	public void setUsuariosid(int usuariosid) {
 		this.usuariosid = usuariosid;
-	}
-	public ofertas() {
-		// TODO Auto-generated constructor stub
-	}
-	public ofertas(int oferta,int tipoPago,int subasta,int usuariosid) {
-		this.oferta=oferta;
-		this.usuariosid=usuariosid;
-		this.tipopago=tipoPago;
-		this.subasta=subasta;
-		
 	}
 
 }

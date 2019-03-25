@@ -1,16 +1,20 @@
 package edu.eci.arsw.model;
 
-public class intems {
+public class Item {
 	int id;
 	String descripcion, marca, modelo;
 
-	public intems(int id, String descripcion, String marca, String modelo) {
+	public Item(int id, String descripcion, String marca, String modelo) {
 		this.descripcion = descripcion;
 		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 
 	}
+	
+	public Item() {
+	}
+	
 
 	public int getId() {
 		return id;
@@ -42,10 +46,6 @@ public class intems {
 
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
-	}
-
-	public intems() {
-		// TODO Auto-generated constructor stub
-	}
+	}	
 
 }

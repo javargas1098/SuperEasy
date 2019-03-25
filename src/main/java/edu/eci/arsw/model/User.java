@@ -9,24 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
 public class User implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int jairitos, jairitosCongelados, jairitosBenefit;
 	private String name, number, addres, password,email;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public User() {
+	
+public User() {
 		
 	}
 
@@ -43,6 +36,14 @@ public class User implements Serializable{
 		this.password = password;
 		this.email=email;
 
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public String getPassword() {

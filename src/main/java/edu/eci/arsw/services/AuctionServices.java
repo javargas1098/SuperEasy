@@ -20,8 +20,7 @@ public class AuctionServices implements IAuctionServices{
 	
 	@Override
 	public List<Auction> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return auctionRepository.findAll();
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import edu.eci.arsw.model.User;
 import edu.eci.arsw.persistences.repositories.IUserRepository;
 
-import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 
-import java.nio.channels.SelectableChannel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

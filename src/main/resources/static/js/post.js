@@ -5,8 +5,9 @@ post = (function() {
 			var data = {
 				name : $("#username").val(),
 				email : $("#email").val(),
-				password : $("#password").val(),
-				number : $("#telefono").val().toString()
+				number : $("#phone").val().toString(),
+				password : $("#password").val()
+				
 			};
 			console.info(data);
 			$.ajax({

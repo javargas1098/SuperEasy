@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+
+import java.nio.channels.SelectableChannel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,8 +64,8 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Override
-	public void createUser(User entit) {
-		
+	public void createUser(User usuario) {
+
 
 		// TODO Auto-generated method stub
 	}
@@ -77,9 +79,9 @@ public class UserPostgresRepository implements IUserRepository {
 	@Override
 	public Long save(User usuario) {
 		// TODO Auto-generated method stub
-		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES("+
-				"4"+","+ usuario.getName() + "," + usuario.getNumber() + "," + usuario.getEmail() + "," + usuario.getPassword()
-				+ "," + "0, 0 , 0);";
+		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES((select max(id_users)+1 from users),'"
+				+ usuario.getName() + "','" + usuario.getNumber() + "','" + usuario.getEmail() + "','" + usuario.getPassword()
+				+ "'," + "0, 0 , 0);";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -112,17 +114,14 @@ public class UserPostgresRepository implements IUserRepository {
 		return null;
 	}
 
-	
 	@Override
 	public User getUserById(long idUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
-
 	public User getUserByName(String name) {
-		String query="SELECT * From users where name ='"+name+"';";
+		String query = "SELECT * From users where name ='" + name + "';";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -137,7 +136,7 @@ public class UserPostgresRepository implements IUserRepository {
 			user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
 			user.setPassword(rs.getString("password"));
 			return user;
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
@@ -157,5 +156,4 @@ public class UserPostgresRepository implements IUserRepository {
 		}
 	}
 
-	
 }

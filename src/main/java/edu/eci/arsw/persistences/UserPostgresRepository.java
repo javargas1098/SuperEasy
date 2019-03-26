@@ -33,12 +33,12 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Autowired
 	private DataSource dataSource;
-	
+
 	@Override
-	public List<User> findAll()  {
-		
-		String query= "SELECT * FROM users;";
-		List<User> users=new ArrayList<User>();
+	public List<User> findAll() {
+
+		String query = "SELECT * FROM users;";
+		List<User> users = new ArrayList<User>();
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
@@ -59,13 +59,13 @@ public class UserPostgresRepository implements IUserRepository {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		}
-		
 	}
+
 	@Override
 	public void createUser(User usuario) {
-		String query = "INSERT into users(id,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES("+
-				"2"+","+ usuario.getName() + "," + usuario.getNumber() + "," + usuario.getEmail() + "," + usuario.getPassword()
-				+ "," + "0, 0 , 0+);";
+		String query = "INSERT into users(id,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES("
+				+ "2" + "," + usuario.getName() + "," + usuario.getNumber() + "," + usuario.getEmail() + ","
+				+ usuario.getPassword() + "," + "0, 0 , 0+);";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -73,9 +73,7 @@ public class UserPostgresRepository implements IUserRepository {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		}
-
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -93,29 +91,33 @@ public class UserPostgresRepository implements IUserRepository {
 	@Override
 	public void update(User entity) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void delete(User o) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void remove(String id) {
 		// TODO Auto-generated method stub
-		
 	}
-	
+
 	@Override
 	public User getUserByEmail(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	@Override
+	public User getUserById(long idUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 	@Bean
-	private DataSource dataSource() throws SQLException{
+	private DataSource dataSource() throws SQLException {
 		if (dbUrl == null || dbUrl.isEmpty()) {
 			return new HikariDataSource();
 		} else {

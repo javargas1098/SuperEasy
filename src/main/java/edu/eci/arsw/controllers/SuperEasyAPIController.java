@@ -30,7 +30,6 @@ public class SuperEasyAPIController {
 	@RequestMapping(value= "/user" , method= RequestMethod.GET)
 	public ResponseEntity<?> GetAllUsers(){
 		try {
-
 			return new ResponseEntity<>(userServices.list(),HttpStatus.OK);
 		}
 		catch(Exception e){

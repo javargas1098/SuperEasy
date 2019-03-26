@@ -1,30 +1,46 @@
 package edu.eci.arsw.model;
 
+import java.io.Serializable;
 import java.util.*;
-import edu.eci.arsw.model.*;
 
+public class Auction implements Serializable {
 
-public class Auction {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	List<User> bidders;
-	int id_Seller, precioSugerido;
 	long idSubasta;
+	List<User> bidders;
+	User seller;
+	int precioSugerido;
 	EstadoSubasta estado;
 	Date horaIni, horaFin;
+	Item item;
 
 	public Auction() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, int id_seller, int precioSugerido) {
+	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, User seller, int precioSugerido,
+			Item item) {
 
 		this.estado = estado;
 		this.horaFin = horaFin;
 		this.horaFin = horaFin;
 		this.idSubasta = idSubasta;
 		this.precioSugerido = precioSugerido;
-		bidders = new LinkedList<User>();
+		this.bidders = new LinkedList<User>();
+		this.seller = seller;
+		this.item = item;
 
+	}
+	
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 	public List<User> getBidders() {
@@ -39,7 +55,7 @@ public class Auction {
 		return idSubasta;
 	}
 
-	public void setIdSubasta(int idSubasta) {
+	public void setIdSubasta(long idSubasta) {
 		this.idSubasta = idSubasta;
 	}
 
@@ -51,12 +67,12 @@ public class Auction {
 		this.estado = estado;
 	}
 
-	public int getId_Seller() {
-		return id_Seller;
+	public User getSeller() {
+		return seller;
 	}
 
-	public void setId_Seller(int id_Seller) {
-		this.id_Seller = id_Seller;
+	public void setSeller(User seller) {
+		this.seller = seller;
 	}
 
 	public int getPrecioSugerido() {

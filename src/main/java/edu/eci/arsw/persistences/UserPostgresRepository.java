@@ -6,6 +6,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import edu.eci.arsw.model.User;
 import edu.eci.arsw.persistences.repositories.IUserRepository;
 
+import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -66,7 +67,6 @@ public class UserPostgresRepository implements IUserRepository {
 	@Override
 	public void createUser(User usuario) {
 
-
 		// TODO Auto-generated method stub
 	}
 
@@ -79,14 +79,14 @@ public class UserPostgresRepository implements IUserRepository {
 	@Override
 	public Long save(User usuario) {
 		// TODO Auto-generated method stub
-		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES((select max(id_users)+1 from users),'"
-				+ usuario.getName() + "','" + usuario.getNumber() + "','" + usuario.getEmail() + "','" + usuario.getPassword()
-				+ "'," + "0, 0 , 0);";
+		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES((Select CASE WHEN EXISTS(SELECT id_users FROM users WHERE id_users=1) THEN max(id_users)+1 ELSE 1 END FROM users),'"
+				+ usuario.getName() + "','" + usuario.getNumber() + "','" + usuario.getEmail() + "','"
+				+ usuario.getPassword() + "'," + "0, 0 , 0);";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			connection.close();
-			return usuario.getId();
+			return (long) 200;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);

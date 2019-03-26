@@ -28,17 +28,14 @@ public class SuperEasyAPIController {
 
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST )
 	public ResponseEntity<?> saveUser(@RequestBody User user) {
-
-		
-		//
 		try {
 			userServices.create(user);
 			//System.out.println(user.getNumber());
-			return new ResponseEntity<>("Error casi",HttpStatus.CREATED);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		catch(Exception e){
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("erroor",HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
 			
 		}
 

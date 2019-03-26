@@ -9,7 +9,6 @@ post = (function() {
 				password : $("#password").val()
 				
 			};
-			console.info(data);
 			$.ajax({
 				method : "POST",
 				contentType : "application/json",
@@ -17,9 +16,11 @@ post = (function() {
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(data) {
+					
 					alert('data: ' + data);
 				},
 				error : function() {
+//					$('body').showMessage({thisMessage: ['Hey! Something bit me!']});
 					alert("There was an error. Try again please!");
 				}
 			});

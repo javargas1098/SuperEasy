@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Super Easy Login</title>
+<link rel="stylesheet" type="text/css"
+	href="styles/bootstrap-4.1.2/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="styles/login.css">
+
+
+</head>
+<body>
+	<div id="getResultDiv" style="padding: 20px 10px 20px 50px">
+		<ul class="list-group">
+		</ul>
+	</div>
+	<div class="login-form">
+		<form>
+			<h2 class="text-center">SuperEasy bids</h2>
+			<div class="form-group">
+				<input type="text" id="userInput" class="form-control"
+					placeholder="Usuario" required="required">
+			</div>
+			<div class="form-group">
+				<input type="password" id="passwordInput" class="form-control"
+					placeholder="Contraseña" required="required">
+			</div>
+
+			<div class="form-group">
+				<button id="loggin" type="button" class="btn btn-primary btn-block"
+					onclick="appuser.evaluateCredentials(userInput.value,passwordInput.value)">Ingresar</button>
+
+			</div>
+		</form>
+		<p class="text-center">
+			<a href="register.html">Crear Una cuenta</a>
+		</p>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="IncorrectLogin" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Credenciales
+						Incorrectas</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">Credenciales Incorrectas Por favor
+					Ingreselas Nuevamente.</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<button type="button" id="ActivateModal" data-toggle="modal"
+		data-target="#IncorrectLogin" style="display: none;">
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+		<script src="js/apiUser.js"></script>
+		<script src="js/appuser.js"></script>
+</body>
+</html>

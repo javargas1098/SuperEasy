@@ -61,6 +61,22 @@ public class UserPostgresRepository implements IUserRepository {
 		}
 		
 	}
+	@Override
+	public void createUser(User usuario) {
+		String query = "INSERT into users(id,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES("+
+				"2"+","+ usuario.getName() + "," + usuario.getNumber() + "," + usuario.getEmail() + "," + usuario.getPassword()
+				+ "," + "0, 0 , 0+);";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+
+		// TODO Auto-generated method stub
+
+	}
 
 	@Override
 	public User find(Long id) {
@@ -111,9 +127,5 @@ public class UserPostgresRepository implements IUserRepository {
 		}
 	}
 
-	@Override
-	public void createUser(User usuario) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

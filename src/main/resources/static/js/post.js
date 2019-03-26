@@ -11,7 +11,7 @@ post = (function() {
 			
 			type : "POST",
 			contentType : "application/json",
-			url : "/superEasy/user",
+			url : "/saveUser",
 			data : JSON.stringify(formData),
 			dataType : 'json',
 			success : function(result) {
@@ -23,10 +23,6 @@ post = (function() {
 					$("#postResultDiv").html("<strong>Error</strong>");
 				}
 				console.log(result);
-			},
-			error : function(e) {
-				alert("Error!")
-				console.log("ERROR: ", e);
 			}
 		});
 	}

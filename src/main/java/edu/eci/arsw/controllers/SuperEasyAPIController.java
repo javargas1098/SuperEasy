@@ -19,7 +19,7 @@ public class SuperEasyAPIController {
 	@Autowired
 	private IUserServices userServices;
 
-	@PostMapping("user")
+	@PostMapping("/saveUser")
 	public ResponseEntity<?> postUser(@RequestBody User user) {
 
 		userServices.create(user);

@@ -62,17 +62,9 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Override
-	public void createUser(User usuario) {
-		String query = "INSERT into users(id,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES("
-				+ "2" + "," + usuario.getName() + "," + usuario.getNumber() + "," + usuario.getEmail() + ","
-				+ usuario.getPassword() + "," + "0, 0 , 0+);";
-		try (Connection connection = dataSource.getConnection()) {
-			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
-		}
+	public void createUser(User entit) {
+		
+
 		// TODO Auto-generated method stub
 	}
 
@@ -83,9 +75,20 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Override
-	public Long save(User entity) {
+	public Long save(User usuario) {
 		// TODO Auto-generated method stub
-		return null;
+		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES("+
+				"4"+","+ usuario.getName() + "," + usuario.getNumber() + "," + usuario.getEmail() + "," + usuario.getPassword()
+				+ "," + "0, 0 , 0);";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			connection.close();
+			return usuario.getId();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override

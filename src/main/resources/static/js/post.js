@@ -1,36 +1,27 @@
 post = (function() {
-	function ajaxPost() {
-		var formData = {
-			name : $("#username").val(),
-			email : $("#email").val(),
-			password : $("#password").val(),
-			number: $("#number").val
-
-		}
-		$.ajax({
-			
-			type : "POST",
-			contentType : "application/json",
-			url : "/saveUser",
-			data : JSON.stringify(formData),
-			dataType : 'json',
-			success : function(result) {
-				if (result.status == "success") {
-					$("#postResultDiv").html(
-							"" + result.data.username
-									+ "Usuario agregado! <br>");
-				} else {
-					$("#postResultDiv").html("<strong>Error</strong>");
-				}
-				console.log(result);
-			}
-		});
-	}
 
 	return {
 		postUser : function() {
-			ajaxPost();
-
+			var data = {
+				name : $("#username").val(),
+				email : $("#email").val(),
+				password : $("#password").val(),
+				number : $("#telefono").val().toString()
+			};
+			console.info(data);
+			$.ajax({
+				method : "POST",
+				contentType : "application/json",
+				url : "superEasy/saveUser",
+				data : JSON.stringify(data),
+				dataType : 'json',
+				success : function(data) {
+					alert('data: ' + data);
+				},
+				error : function() {
+					alert("There was an error. Try again please!");
+				}
+			});
 		}
 	}
 

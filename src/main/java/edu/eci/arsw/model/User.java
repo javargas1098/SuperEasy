@@ -2,35 +2,34 @@ package edu.eci.arsw.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public int jairitos, jairitosCongelados, jairitosBenefit;
-	public  String name, number, addres, password,email;
+	private int jairitos, jairitosCongelados, jairitosBenefit;
+	private String name, number, addres, password, email;
 
-	
 	private long id;
-	
-public User() {
-		
-	}
 
-	public User(long id, String name, String number, int jairitos, int jairitosCongelados,
-			int jairitosBenefit, String password,String email) {
-
-		this.id = id;
-		this.name = name;
-		this.number = number;
-		this.jairitos = jairitos;
-		this.jairitosBenefit = jairitosBenefit;
-		this.jairitosCongelados = jairitosCongelados;
-		this.password = password;
-		this.email=email;
+	public User() {
 
 	}
+
+//	public User(long id, String name, String number, int jairitos, int jairitosCongelados, int jairitosBenefit,
+//			String password, String email) {
+//
+//		this.id = id;
+//		this.name = name;
+//		this.number = number;
+//		this.jairitos = jairitos;
+//		this.jairitosBenefit = jairitosBenefit;
+//		this.jairitosCongelados = jairitosCongelados;
+//		this.password = password;
+//		this.email = email;
+//
+//	}
 
 	public String getEmail() {
 		return email;
@@ -39,7 +38,7 @@ public User() {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -101,8 +100,7 @@ public User() {
 	}
 
 	public void setId(long id) {
-		this.id=id;
+		this.id = id;
 	}
 
-	
 }

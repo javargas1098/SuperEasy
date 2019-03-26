@@ -3,8 +3,11 @@ package edu.eci.arsw.controllers;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.autoconfigure.ActuatorMetricWriter;
+
+
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +26,22 @@ public class SuperEasyAPIController {
 	@Autowired
 	private IAuctionServices auctionServices;
 
-	@PostMapping("/saveUser")
-	public ResponseEntity<?> postUser(@RequestBody User user) {
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST )
+	public ResponseEntity<?> saveUser(@RequestBody User user) {
 
-		userServices.create(user);
+		
+		//
+		try {
+			userServices.create(user);
+			//System.out.println(user.getNumber());
+			return new ResponseEntity<>("Error casi",HttpStatus.CREATED);
+		}
+		catch(Exception e){
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("erroor",HttpStatus.NOT_FOUND);
+			
+		}
 
-		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value= "/user" , method= RequestMethod.GET)

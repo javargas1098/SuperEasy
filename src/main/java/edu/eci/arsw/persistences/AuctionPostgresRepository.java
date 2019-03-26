@@ -119,7 +119,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	@Override
 	public Long save(Auction auction) {
 		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES("
-				+ "2" + "," + auction.getEstado() + "," + auction.getHoraIni() + "," + auction.getHoraFin() + ","
+				+ "(SELECT max(id_subasta)+1 FROM subastas)" + "," + auction.getEstado() + "," + auction.getHoraIni() + "," + auction.getHoraFin() + ","
 				+ auction.getPrecioSugerido() + "," + auction.getSeller().getId()  + auction.getItem().getId()  + ");";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();

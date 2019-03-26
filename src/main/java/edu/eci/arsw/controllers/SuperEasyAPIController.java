@@ -39,4 +39,37 @@ public class SuperEasyAPIController {
 		}
 		
 	}
+	@RequestMapping(value= "/credentials/{name}/{password}" , method= RequestMethod.GET)
+	public ResponseEntity<?> EvaluateCredentials(@PathVariable String name,@PathVariable String password){
+		try {
+			User u=userServices.getUserByName(name);
+			if(u.getPassword().equals(password)) {
+				return new ResponseEntity<>(true,HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(false,HttpStatus.OK);
+			}
+			
+		}
+		catch(Exception e){
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
+			
+		}
+		
+	}
+	
+	@RequestMapping(value= "/user/{name}" , method= RequestMethod.GET)
+	public ResponseEntity<?> GetUser(@PathVariable String name){
+		try {
+
+			return new ResponseEntity<>(userServices.getUserByName(name),HttpStatus.OK);
+		}
+		catch(Exception e){
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("Error no User Found",HttpStatus.NOT_FOUND);
+			
+		}
+		
+	}
 }

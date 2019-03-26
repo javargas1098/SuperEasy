@@ -8,5 +8,9 @@ import edu.eci.arsw.model.User;
 public interface IUserRepository extends DAO<User, Long>  {
 	public void createUser(User usuario);
 	User getUserByEmail(String email);
+
 	User getUserById(long idUser);
+
+	User getUserByName(String name);
+
 }

@@ -108,6 +108,7 @@ public class UserPostgresRepository implements IUserRepository {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	
 	@Override
 	public User getUserById(long idUser) {
@@ -115,6 +116,30 @@ public class UserPostgresRepository implements IUserRepository {
 		return null;
 	}
 
+
+
+	public User getUserByName(String name) {
+		String query="SELECT * From users where name ='"+name+"';";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			rs.next();
+			User user = new User();
+			user.setName(rs.getString("name"));
+			user.setId(Long.parseLong(rs.getString("id_users")));
+			user.setEmail(rs.getString("email"));
+			user.setNumber(rs.getString("phone"));
+			user.setJairitos(Integer.parseInt(rs.getString("jairitos")));
+			user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
+			user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
+			user.setPassword(rs.getString("password"));
+			return user;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
 
 	@Bean
 	private DataSource dataSource() throws SQLException {

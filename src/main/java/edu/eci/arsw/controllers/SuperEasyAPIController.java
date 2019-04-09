@@ -54,10 +54,10 @@ public class SuperEasyAPIController {
 		
 	}
 	
-	@RequestMapping(value= "/credentials/{name}/{password}" , method= RequestMethod.GET)
-	public ResponseEntity<?> EvaluateCredentials(@PathVariable String name,@PathVariable String password){
+	@RequestMapping(value= "/credentials/{email}/{password}" , method= RequestMethod.GET)
+	public ResponseEntity<?> EvaluateCredentials(@PathVariable String email,@PathVariable String password){
 		try {
-			User u=userServices.getUserByName(name);
+			User u = userServices.get(email);
 			if(u.getPassword().equals(password)) {
 				return new ResponseEntity<>(true,HttpStatus.OK);
 			}
@@ -74,11 +74,11 @@ public class SuperEasyAPIController {
 		
 	}
 	
-	@RequestMapping(value= "/user/{name}" , method= RequestMethod.GET)
-	public ResponseEntity<?> GetUser(@PathVariable String name){
+	@RequestMapping(value= "/user/{email}" , method= RequestMethod.GET)
+	public ResponseEntity<?> GetUser(@PathVariable String email){
 		try {
 
-			return new ResponseEntity<>(userServices.getUserByName(name),HttpStatus.OK);
+			return new ResponseEntity<>(userServices.get(email),HttpStatus.OK);
 		}
 		catch(Exception e){
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);

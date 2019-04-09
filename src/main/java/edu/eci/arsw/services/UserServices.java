@@ -54,9 +54,4 @@ public class UserServices implements IUserServices {
 		userRepository.update(user);
 	}
 
-	@Override
-	public User getUserByName(String name) {
-		return userRepository.getUserByName(name);
-	}
-
 }

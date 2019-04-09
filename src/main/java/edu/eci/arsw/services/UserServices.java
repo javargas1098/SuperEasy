@@ -26,7 +26,7 @@ public class UserServices implements IUserServices {
 	public User create(User user) {
 		if (null == user.getEmail())
 			throw new RuntimeException("Id invalid");
-		else if (userRepository.find(user.getId()) != null)
+		else if (userRepository.getUserByEmail(user.getEmail()) != null)
 			throw new RuntimeException("The user already exists");
 		else
 			userRepository.save(user);
@@ -35,6 +35,7 @@ public class UserServices implements IUserServices {
 
 	@Override
 	public User get(String email) {
+		
 		return userRepository.getUserByEmail(email);
 	}
 

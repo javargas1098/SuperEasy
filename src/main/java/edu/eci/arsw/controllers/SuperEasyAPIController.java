@@ -29,6 +29,7 @@ public class SuperEasyAPIController {
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST )
 	public ResponseEntity<?> saveUser(@RequestBody User user) {
 		try {
+
 			userServices.create(user);
 			//System.out.println(user.getNumber());
 			return new ResponseEntity<>(HttpStatus.CREATED);
@@ -57,6 +58,7 @@ public class SuperEasyAPIController {
 	@RequestMapping(value= "/credentials/{email}/{password}" , method= RequestMethod.GET)
 	public ResponseEntity<?> EvaluateCredentials(@PathVariable String email,@PathVariable String password){
 		try {
+			
 			User u = userServices.get(email);
 			if(u.getPassword().equals(password)) {
 				return new ResponseEntity<>(true,HttpStatus.OK);
@@ -64,11 +66,10 @@ public class SuperEasyAPIController {
 			else {
 				return new ResponseEntity<>(false,HttpStatus.OK);
 			}
-			
 		}
 		catch(Exception e){
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>(false,HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(false,HttpStatus.OK);
 			
 		}
 		

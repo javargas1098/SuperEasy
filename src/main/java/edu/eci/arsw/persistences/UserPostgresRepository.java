@@ -65,12 +65,13 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Override
 	public User find(Long id) {
+		System.out.println("!/////////////////////////////////////////////////////////FIND");
 		String query = "SELECT * FROM users WHERE id_users = " + id + ";";
 		User user = new User();
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-
+			rs.next();
 			user.setName(rs.getString("name"));
 			user.setId(Long.parseLong(rs.getString("id_users")));
 			user.setEmail(rs.getString("email"));
@@ -89,6 +90,7 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Override
 	public Long save(User usuario) {
+		
 		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES((Select CASE WHEN EXISTS(SELECT id_users FROM users WHERE id_users=1) THEN max(id_users)+1 ELSE 1 END FROM users),'"
 				+ usuario.getName() + "','" + usuario.getNumber() + "','" + usuario.getEmail() + "','"
 				+ usuario.getPassword() + "'," + "0, 0 , 0);";
@@ -130,22 +132,29 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Override
 	public User getUserByEmail(String email) {
-		String query = "SELECT * FROM users WHERE email =" + email + ";";
+		
+		String query = "SELECT * FROM users WHERE email ='" + email + "';";
 		User user = new User();
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {
+				user.setName(rs.getString("name"));
+				user.setId(Long.parseLong(rs.getString("id_users")));
+				user.setEmail(rs.getString("email"));
+				user.setNumber(rs.getString("phone"));
+				user.setJairitos(Integer.parseInt(rs.getString("jairitos")));
+				user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
+				user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
+				user.setPassword(rs.getString("password"));
 
-			user.setName(rs.getString("name"));
-			user.setId(Long.parseLong(rs.getString("id_users")));
-			user.setEmail(rs.getString("email"));
-			user.setNumber(rs.getString("phone"));
-			user.setJairitos(Integer.parseInt(rs.getString("jairitos")));
-			user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
-			user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
-			user.setPassword(rs.getString("password"));
-
-			return user;
+				return user;
+				
+			}
+			else {
+				return null;
+			}
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);

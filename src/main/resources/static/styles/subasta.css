@@ -1,0 +1,5 @@
+.carousel-inner .item img {
+	border-radius: 0px 0px 0 0;
+	max-height: 480px;
+	overflow: hidden;
+}

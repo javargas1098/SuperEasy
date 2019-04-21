@@ -19,7 +19,14 @@ apiUser = (function() {
 					data) {
 				callback(data);
 			});
+		},
+		getUserbyEmail: function(email,callback){
+			$.get("superEasy/user/"+email+"/name",function(data){
+				console.log(data);
+				callback(data);
+			});
 		}
+		
 
 	}
 })();

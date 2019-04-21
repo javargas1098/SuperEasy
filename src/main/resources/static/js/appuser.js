@@ -18,7 +18,27 @@ appuser=(function(){
 			console.info(window.localStorage.getItem('key')); //hash
 			console.info(atob(window.localStorage.getItem('key'))); //decifrado
 			
+			if(window.localStorage.getItem('key')!=null){
+				document.getElementById('loginul').innerHTML="";
+				document.getElementById('registerul').innerHTML="";
+				var email=atob(window.localStorage.getItem('key')).split(":")[0];
+				apiUser.getUserbyEmail(email,function(u){
+					document.getElementById('userName').innerHTML=u;
+				});
+				
+				
+				
+				
+			}
+			else{
+				
+			}
+		},
+		putName:function(){
+			
+			
 		}
+		
 	}
 	
 })();

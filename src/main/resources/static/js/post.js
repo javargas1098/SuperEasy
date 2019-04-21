@@ -17,11 +17,11 @@ post = (function() {
 				dataType : 'json',
 				success : function(data) {
 					
-					alert('data: ' + data);
+					alert('Usuario creado exitosamente, Ya puede ingresar con sus datos');
 				},
-				error : function() {
-//					$('body').showMessage({thisMessage: ['Hey! Something bit me!']});
-					alert("There was an error. Try again please!");
+				error : function() {				
+					alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+					// si se puede crear usuario pero tira esta alerta
 				}
 			});
 		}

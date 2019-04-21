@@ -65,7 +65,7 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Override
 	public User find(Long id) {
-		System.out.println("!/////////////////////////////////////////////////////////FIND");
+		
 		String query = "SELECT * FROM users WHERE id_users = " + id + ";";
 		User user = new User();
 		try (Connection connection = dataSource.getConnection()) {

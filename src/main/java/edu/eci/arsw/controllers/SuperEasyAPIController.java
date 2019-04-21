@@ -87,6 +87,18 @@ public class SuperEasyAPIController {
 			
 		}
 	}
+	@RequestMapping(value= "/user/{email}/name" , method= RequestMethod.GET)
+	public ResponseEntity<?> GetUserNameByEmail(@PathVariable String email){
+		try {
+			
+			return new ResponseEntity<>(userServices.get(email).getName(),HttpStatus.OK);
+		}
+		catch(Exception e){
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("Error no User Found",HttpStatus.NOT_FOUND);
+			
+		}
+	}
 	
 	@GetMapping("/auctions")
 	public ResponseEntity<?> getAllAuctions() {

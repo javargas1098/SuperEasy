@@ -10,22 +10,21 @@
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 </head>
-<body>
+<body onload="appuser.getUserCredential()">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Shopping Cart - Admin Add Product</h1>
 			</div>
 		</div>
-		<div class="container">
-		</div>
+		<div class="container"></div>
 	</div>
 
 	<div class="container">
 
 		<div class="row">
 			<div class="col-md-6">
-				<h1>Add Auction</h1>
+				<h1>Add Item</h1>
 			</div>
 		</div>
 
@@ -36,24 +35,15 @@
 			<div class="col-md-6">
 				<form role="form">
 
-					<!-- 				<select class="form-control" id="productSelect"><option>Please -->
-					<!-- 						Select a Product Group</option> -->
-					<!-- 					<option>Bar Soaps</option> -->
-					<!-- 					<option>Lotions</option> -->
-					<!-- 					<option>Creams</option> -->
-					<!-- 				</select> -->
 
 					<div class="form-group">
-						<label for="productname" class="loginFormElement">Username:</label>
-						<input class="form-control" id="productname" type="email">
+						<label for="productname" class="loginFormElement">Marca</label> <input
+							class="form-control" id="productmarca" type="text">
 					</div>
-
 					<div class="form-group">
-						<label for="productprice" class="loginFormElement">Product
-							Price</label> <input class="form-control" id="productprice" type="email">
+						<label for="productname" class="loginFormElement">Modelo</label> <input
+							class="form-control" id="productmodel" type="text">
 					</div>
-
-
 					<div class="form-group">
 
 						<label class="control-label">Product Image</label> <input
@@ -66,9 +56,10 @@
 							Description</label> <input id="productdescription"
 							class="form-control input-lg" placeholder="Large" type="text">
 						<div class="container"></div>
-						
-						<button type="submit" id="loginSubmit"
-							class="btn btn-success loginFormElement">Add Product</button>
+
+						<button type="submit" id=""
+							class="btn btn-success loginFormElement"
+							onclick="postSubasta.postItem(); return false;">Add Product</button>
 
 					</div>
 				</form>
@@ -82,5 +73,8 @@
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>
 	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+	<script src="js/postSubasta.js"></script>
+	<script src="js/appuser.js"></script>
+	<script src="js/apiUser.js"></script>
 </body>
 </html>

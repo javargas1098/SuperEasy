@@ -30,13 +30,10 @@ appuser=(function(){
 				
 				
 			}
-			else{
-				
-			}
 		},
-		putName:function(){
-			
-			
+		getUserCredential:function(){
+			console.info(window.localStorage.getItem('key')); //hash
+			console.info(atob(window.localStorage.getItem('key'))); //decifrado
 		}
 		
 	}

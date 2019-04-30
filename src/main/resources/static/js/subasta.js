@@ -26,7 +26,7 @@ var subasta=( function(){
     	ofertar:function(value){
     		var x = parseInt(document.getElementById("actualValue").textContent);
     		if(value>x){
-    			stompClient.send("/topic/"+subasta.product,{},JSON.stringify(value));
+    			stompClient.send("/app/"+subasta.product,{},JSON.stringify(value));
     		}
     		else{
     			alert("no se puede ofertar un valor menor");

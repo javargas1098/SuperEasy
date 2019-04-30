@@ -17,12 +17,14 @@ public class Auction implements Serializable {
 	EstadoSubasta estado;
 	Date horaIni, horaFin;
 	Item item;
+	int precioActual;
+	
 
 	public Auction() {
 	}
 
 	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, User seller, int precioSugerido,
-			Item item) {
+			Item item,int precioActual) {
 
 		this.estado = estado;
 		this.horaFin = horaFin;
@@ -32,9 +34,27 @@ public class Auction implements Serializable {
 		this.bidders = new LinkedList<User>();
 		this.seller = seller;
 		this.item = item;
+		this.precioActual=precioActual;
+		check(); 
+			
+			
+		
+		
 
 	}
 	
+	public int getPrecioActual() {
+		return precioActual;
+	}
+
+	public void setPrecioActual(int precioActual) {
+		check();
+		if (estado.equals(EstadoSubasta.INICIADO)){
+			this.precioActual = precioActual;
+		}
+		
+	}
+
 	public Item getItem() {
 		return item;
 	}
@@ -97,6 +117,18 @@ public class Auction implements Serializable {
 
 	public void setHoraFin(Date horaFin) {
 		this.horaFin = horaFin;
+	}
+	
+	public void check() {
+		if(horaIni.getTime()<System.currentTimeMillis() && horaFin.getTime()>System.currentTimeMillis()) {
+			estado=EstadoSubasta.INICIADO;
+		}
+		else if(horaFin.getTime()<System.currentTimeMillis()) {
+			estado=EstadoSubasta.FINALIZADA;
+		}
+		else {
+			estado=EstadoSubasta.SUSPENDIDO;
+		}
 	}
 
 }

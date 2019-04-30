@@ -34,12 +34,13 @@
 
 			<div class="col-md-6">
 				<form role="form">
-
+					
 
 					<div class="form-group">
 						<label for="productname" class="loginFormElement">Marca</label> <input
 							class="form-control" id="productmarca" type="text">
 					</div>
+					
 					<div class="form-group">
 						<label for="productname" class="loginFormElement">Modelo</label> <input
 							class="form-control" id="productmodel" type="text">
@@ -50,6 +51,14 @@
 							class="filestyle" data-icon="false" type="file">
 
 					</div>
+					<div class="form-group">
+						<label for="productname" class="loginFormElement">hora de fin</label> <input
+							class="form-control" id="productfecha" type="datetime-local">
+					</div>
+					<div class="form-group">
+						<label for="productname" class="loginFormElement">Precio sugerido</label> <input
+							class="form-control" id="productprice" type="number">
+					</div>
 
 					<div class="form-group">
 						<label class="loginformelement" for="productdescription">Product
@@ -59,7 +68,7 @@
 
 						<button type="submit" id=""
 							class="btn btn-success loginFormElement"
-							onclick="postSubasta.postItem(); return false;">Add Product</button>
+							onclick="postSubasta.postItem();">Add Product</button>
 
 					</div>
 				</form>

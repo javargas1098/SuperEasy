@@ -120,12 +120,12 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	@Override
 	public Long save(Auction auction) {
 		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES((Select CASE WHEN EXISTS(SELECT id_subasta FROM subastas WHERE id_subasta=1) THEN max(id_subasta)+1 ELSE 1 END FROM subastas)"
-				+ ",'" + auction.getEstado() + "','" + auction.getHoraIni() + "','" + auction.getHoraFin() + "','"
+				+ ",'" + auction.getEstado() + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','MM/DD/YYYY HH12:MI'),TO_TIMESTAMP('" + auction.getHoraFin() + "','MM/DD/YYYY HH12:MI'),'"
 				+ auction.getPrecioSugerido() + "','" + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId()
 				+ auction.getItem().getId() + "');";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			connection.close();
 			return auction.getIdSubasta();
 		} catch (Exception e) {
@@ -141,7 +141,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 				+ ",'" + item.getDescripcion() + "','" + item.getMarca() + "','" + item.getModelo() + "');";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			connection.close();
 			return item.getId();
 		} catch (Exception e) {

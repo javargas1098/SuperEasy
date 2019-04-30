@@ -12,7 +12,7 @@ public class Auction implements Serializable {
 
 	long idSubasta;
 	List<User> bidders;
-	User seller;
+	String  seller;
 	int precioSugerido;
 	EstadoSubasta estado;
 	Date horaIni, horaFin;
@@ -23,7 +23,7 @@ public class Auction implements Serializable {
 	public Auction() {
 	}
 
-	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, User seller, int precioSugerido,
+	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, String seller, int precioSugerido,
 			Item item,int precioActual) {
 
 		this.estado = estado;
@@ -87,11 +87,11 @@ public class Auction implements Serializable {
 		this.estado = estado;
 	}
 
-	public User getSeller() {
+	public String getSeller() {
 		return seller;
 	}
 
-	public void setSeller(User seller) {
+	public void setSeller(String seller) {
 		this.seller = seller;
 	}
 

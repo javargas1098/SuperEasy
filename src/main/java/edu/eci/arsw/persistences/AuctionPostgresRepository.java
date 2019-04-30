@@ -56,7 +56,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 				auction.setHoraIni(new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_ini")));
 				auction.setHoraFin(new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_fin")));
 				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
-				auction.setSeller(UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))));
+				auction.setSeller(UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
 				auction.setBidders(getBidders(Long.parseLong(rs.getString("id_subasta"))));
 				auction.setItem(getItem(Long.parseLong(rs.getString("id_subasta"))));
 
@@ -121,7 +121,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES("
 				+ "(Select CASE WHEN EXISTS(SELECT id_subasta FROM subastas WHERE id_subasta=1) THEN max(id_subasta)+1 ELSE 1 END FROM subastas)"
 				+ "," + auction.getEstado() + "," + auction.getHoraIni() + "," + auction.getHoraFin() + ","
-				+ auction.getPrecioSugerido() + "," + auction.getSeller().getId() + auction.getItem().getId() + ");";
+				+ auction.getPrecioSugerido() + "," + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId() + auction.getItem().getId() + ");";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);

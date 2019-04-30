@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import edu.eci.arsw.model.Item;
 import edu.eci.arsw.model.User;
 import edu.eci.arsw.services.contracts.IAuctionServices;
 import edu.eci.arsw.services.contracts.IUserServices;
@@ -32,6 +33,21 @@ public class SuperEasyAPIController {
 
 			userServices.create(user);
 			//System.out.println(user.getNumber());
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+		catch(Exception e){
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
+			
+		}
+
+	}
+	
+	@RequestMapping(value = "/saveItem", method = RequestMethod.POST )
+	public ResponseEntity<?> saveItem(@RequestBody Item item) {
+		try {
+
+			auctionServices.createItem(item);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		catch(Exception e){

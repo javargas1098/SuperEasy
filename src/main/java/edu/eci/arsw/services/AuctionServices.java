@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.model.Auction;
-import edu.eci.arsw.model.User;
+import edu.eci.arsw.model.Item;
 import edu.eci.arsw.persistences.repositories.IAuctionRepository;
 import edu.eci.arsw.services.contracts.IAuctionServices;
 
@@ -24,14 +24,18 @@ public class AuctionServices implements IAuctionServices{
 	}
 
 	@Override
-	public User create(Auction auction) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long create(Auction auction) {
+		return auctionRepository.save(auction);
+	}
+	
+	@Override
+	public Long createItem(Item item) {
+		return auctionRepository.saveItem(item);
 	}
 
 	@Override
-	public User get(long id) {
-		// TODO Auto-generated method stub
+	public Auction get(long id) {
+		auctionRepository.find(id);
 		return null;
 	}
 

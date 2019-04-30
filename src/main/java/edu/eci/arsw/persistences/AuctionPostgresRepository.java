@@ -1,4 +1,5 @@
 package edu.eci.arsw.persistences;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -118,13 +119,30 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	@Override
 	public Long save(Auction auction) {
 		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES("
-				+ "(SELECT max(id_subasta)+1 FROM subastas)" + "," + auction.getEstado() + "," + auction.getHoraIni() + "," + auction.getHoraFin() + ","
-				+ auction.getPrecioSugerido() + "," + auction.getSeller().getId()  + auction.getItem().getId()  + ");";
+				+ "(Select CASE WHEN EXISTS(SELECT id_subasta FROM subastas WHERE id_subasta=1) THEN max(id_subasta)+1 ELSE 1 END FROM subastas)"
+				+ "," + auction.getEstado() + "," + auction.getHoraIni() + "," + auction.getHoraFin() + ","
+				+ auction.getPrecioSugerido() + "," + auction.getSeller().getId() + auction.getItem().getId() + ");";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			connection.close();
 			return auction.getIdSubasta();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public Long saveItem(Item item) {
+		String query = "INSERT into items(item_id,description,marca,modelo) VALUES("
+				+ "(Select CASE WHEN EXISTS(SELECT item_id FROM items WHERE item_id=1) THEN max(item_id)+1 ELSE 1 END FROM items)"
+				+ "," + item.getDescripcion() + "," + item.getMarca() + "," + item.getModelo() + ");";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			connection.close();
+			return item.getId();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);

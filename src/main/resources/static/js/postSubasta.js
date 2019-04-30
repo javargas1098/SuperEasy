@@ -3,21 +3,41 @@ postSubasta = (function() {
 	return {
 		postItem : function() {
 			var data = {
-				email:atob(window.localStorage.getItem('key')).split(":")[0],
 				marca:$("#productmarca").val(),
 				modelo:$("#productmodel").val(),
-				description:$("#productdescription").val()
-				
+				descripcion:$("#productdescription").val()
+
+			};
+			var datasubasta={
+				seller:atob(window.localStorage.getItem('key')).split(":")[0],
+				precioSugerido: $("#productprice").val().toString(),
+				horaFin : $("#productfecha").val()
+					
 			};
 			$.ajax({
 				method : "POST",
 				contentType : "application/json",
-				url : "superEasy/saveUser",
+				url : "superEasy/saveItem",
 				data : JSON.stringify(data),
 				dataType : 'json',
 				success : function(data) {
 					
-					alert('Se creo, Ya puede ingresar con sus datos');
+					alert('Se creo, ');
+				},
+				error : function() {				
+					alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+					// si se puede crear usuario pero tira esta alerta
+				}
+			});
+			$.ajax({
+				method : "POST",
+				contentType : "application/json",
+				url : "superEasy/saveAuction",
+				data : JSON.stringify(datasubasta),
+				dataType : 'json',
+				success : function(data) {
+					
+					alert('Se creo, ');
 				},
 				error : function() {				
 					alert("Hay un error en los datos ingresados por favor intentelo nuevamente");

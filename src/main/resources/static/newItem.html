@@ -68,7 +68,7 @@
 
 						<button type="submit" id=""
 							class="btn btn-success loginFormElement"
-							onclick="postSubasta.postItem();">Add Product</button>
+							onclick="postSubasta.postItem(); return false;">Add Product</button>
 
 					</div>
 				</form>
@@ -79,9 +79,12 @@
 
 
 	<div id="push"></div>
+	<script
+  src="https://code.jquery.com/jquery-1.7.2.js"></script>
 	<script src="js/jquery-3.3.1.min.js"></script>
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>
 	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+	<script src="https://momentjs.com/downloads/moment.min.js"></script>
 	<script src="js/postSubasta.js"></script>
 	<script src="js/appuser.js"></script>
 	<script src="js/apiUser.js"></script>

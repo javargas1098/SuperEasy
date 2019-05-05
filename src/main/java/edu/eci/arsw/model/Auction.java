@@ -15,7 +15,7 @@ public class Auction implements Serializable {
 	String  seller;
 	int precioSugerido;
 	EstadoSubasta estado;
-	Date horaIni, horaFin;
+	Date horaIni, horaFinal;
 	Item item;
 	int precioActual;
 	
@@ -23,12 +23,12 @@ public class Auction implements Serializable {
 	public Auction() {
 	}
 
-	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFin, String seller, int precioSugerido,
+	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFinal, String seller, int precioSugerido,
 			Item item,int precioActual) {
 
 		this.estado = estado;
-		this.horaFin = horaFin;
-		this.horaFin = horaFin;
+		this.horaFinal = horaFinal;
+		this.horaIni = horaIni;
 		this.idSubasta = idSubasta;
 		this.precioSugerido = precioSugerido;
 		this.bidders = new LinkedList<User>();
@@ -112,18 +112,18 @@ public class Auction implements Serializable {
 	}
 
 	public Date getHoraFin() {
-		return horaFin;
+		return horaFinal;
 	}
 
-	public void setHoraFin(Date horaFin) {
-		this.horaFin = horaFin;
+	public void setHoraFin(Date horaFinal) {
+		this.horaFinal = horaFinal;
 	}
 	
 	public void check() {
-		if(horaIni.getTime()<System.currentTimeMillis() && horaFin.getTime()>System.currentTimeMillis()) {
+		if(horaIni.getTime()<System.currentTimeMillis() && horaFinal.getTime()>System.currentTimeMillis()) {
 			estado=EstadoSubasta.INICIADO;
 		}
-		else if(horaFin.getTime()<System.currentTimeMillis()) {
+		else if(horaFinal.getTime()<System.currentTimeMillis()) {
 			estado=EstadoSubasta.FINALIZADA;
 		}
 		else {

@@ -119,8 +119,11 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	@Override
 	public Long save(Auction auction) {
+		System.out.println("///////////////////////////////////////////////////////////////////horas");
+		System.out.println(auction.getHoraFin());
+		System.out.println(auction.getHoraIni());
 		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES((Select CASE WHEN EXISTS(SELECT id_subasta FROM subastas WHERE id_subasta=1) THEN max(id_subasta)+1 ELSE 1 END FROM subastas)"
-				+ ",'" + auction.getEstado() + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','MM/DD/YYYY HH12:MI'),TO_TIMESTAMP('" + auction.getHoraFin() + "','MM/DD/YYYY HH12:MI'),'"
+				+ ",'" + auction.getEstado() + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','dd/mm/yyyy hh24:mi'),TO_TIMESTAMP('" + auction.getHoraFin() + "','dd/mm/yyyy hh24:mi'),'"
 				+ auction.getPrecioSugerido() + "','" + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId()
 				+ auction.getItem().getId() + "');";
 		try (Connection connection = dataSource.getConnection()) {

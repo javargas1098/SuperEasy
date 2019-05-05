@@ -6,7 +6,8 @@ postSubasta = (function() {
 	var hour = String(today.getHours()).padStart(2, '0');
 	var minutes = String(today.getMinutes());
 
-	today = mm + '/' + dd + '/' + yyyy + "  " + hour + ':' + minutes;
+	today = (mm + '/' + dd + '/' + yyyy + "  " + hour + ':' + minutes);
+	var horaFinal = new Date();
 
 	return {
 
@@ -20,11 +21,13 @@ postSubasta = (function() {
 			var datasubasta = {
 				seller : atob(window.localStorage.getItem('key')).split(":")[0],
 				precioSugerido : $("#productprice").val().toString(),
-				horaFin : $("#productfecha").val(),
+				//horaFinal : today.toString(),
+				horaFinal : moment($('#productfecha').val()).format('MM/DD/YYYY  HH:mm'),
 				horaini : today
 
 			};
 			console.info(datasubasta);
+			//console.info(horaFin);
 			$
 					.ajax({
 						method : "POST",

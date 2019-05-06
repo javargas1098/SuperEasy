@@ -1,6 +1,7 @@
 package edu.eci.arsw.persistences;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -53,8 +54,8 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 				Auction auction = new Auction();
 				auction.setIdSubasta(Long.parseLong(rs.getString("id_subasta")));
 				auction.setEstado(EstadoSubasta.valueOf(rs.getString("estado")));
-				auction.setHoraIni(new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_ini")));
-				auction.setHoraFin(new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_fin")));
+				auction.setHoraIni((Date) new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_ini")));
+				auction.setHoraFin((Date) new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_fin")));
 				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
 				auction.setSeller(
 						UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());

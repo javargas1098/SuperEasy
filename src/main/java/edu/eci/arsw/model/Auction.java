@@ -1,10 +1,9 @@
 package edu.eci.arsw.model;
 
 import java.io.Serializable;
-import java.util.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.sql.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

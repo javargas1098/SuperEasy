@@ -21,13 +21,15 @@ postSubasta = (function() {
 			var datasubasta = {
 				seller : atob(window.localStorage.getItem('key')).split(":")[0],
 				precioSugerido : $("#productprice").val().toString(),
-				//horaFinal : today.toString(),
-				horaFinal : moment($('#productfecha').val()).format('MM/DD/YYYY  HH:mm'),
-				horaini : today
+				// horaFinal : today.toString(),
+				horaFinal : moment($('#productfecha').val()).format(
+						'MM/DD/YYYY HH:mm'),
+				horaIni : today,
+				item : data
 
 			};
 			console.info(datasubasta);
-			//console.info(horaFin);
+			// console.info(horaFin);
 			$
 					.ajax({
 						method : "POST",
@@ -39,10 +41,10 @@ postSubasta = (function() {
 
 							alert('Se creo, ');
 						},
-						error : function() {
-							alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
-							// si se puede crear usuario pero tira esta alerta
-						}
+//						error : function() {
+//							alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+//							// si se puede crear usuario pero tira esta alerta
+//						}
 					});
 			$
 					.ajax({
@@ -55,10 +57,10 @@ postSubasta = (function() {
 
 							alert('Se creo, ');
 						},
-						error : function() {
-							alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
-							// si se puede crear usuario pero tira esta alerta
-						}
+//						error : function() {
+//							alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+//							// si se puede crear usuario pero tira esta alerta
+//						}
 					});
 		}
 

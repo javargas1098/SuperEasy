@@ -1,13 +1,12 @@
 package edu.eci.arsw.controllers;
 
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,10 +60,7 @@ public class SuperEasyAPIController {
 	@RequestMapping(value = "/saveAuction", method = RequestMethod.POST )
 	public ResponseEntity<?> saveSubasta(@RequestBody Auction auction) {
 		try {
-			System.out.println(auction.getHoraFin());
-			System.out.println(auction.getHoraIni());
-			System.out.println(auction.getPrecioSugerido());
-			//auctionServices.create(auction);
+			System.out.println(auction.toString());
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		catch(Exception e){

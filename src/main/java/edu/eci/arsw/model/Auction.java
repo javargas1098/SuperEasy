@@ -3,6 +3,11 @@ package edu.eci.arsw.model;
 import java.io.Serializable;
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Auction implements Serializable {
 
 	/**
@@ -12,19 +17,35 @@ public class Auction implements Serializable {
 
 	long idSubasta;
 	List<User> bidders;
-	String  seller;
-	int precioSugerido;
+	String seller;
+	int precioSugerido, precioActual;
 	EstadoSubasta estado;
+	@JsonFormat(pattern = "MM/DD/YYYY HH:mm")
 	Date horaIni, horaFinal;
 	Item item;
-	int precioActual;
-	
+
+	@Override
+	public String toString() {
+		String respuesta = "ID: " + idSubasta + "\n" +
+				"Bidders: " + bidders + "\n" +
+				"Seller: " + seller + "\n" +
+				"PrecioSugerido: " + precioSugerido + "\n" +
+				"PrecioActual: " + precioActual + "\n" +
+				"EstadoSubasta: " + estado + "\n" +
+				"HoraInicio: " + horaIni + "\n" +
+				"HoraFin: " + horaFinal + "\n" +
+				"MarcaItem: " + item.getMarca() + "\n" +
+				"DescripcionItem: " + item.getDescripcion() + "\n" +
+				"ModeloItem: " + item.getModelo() + "\n";
+				
+		return respuesta;
+	}
 
 	public Auction() {
 	}
 
-	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFinal, String seller, int precioSugerido,
-			Item item,int precioActual) {
+	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFinal, String seller,
+			int precioSugerido, Item item, int precioActual) {
 
 		this.estado = estado;
 		this.horaFinal = horaFinal;
@@ -34,25 +55,21 @@ public class Auction implements Serializable {
 		this.bidders = new LinkedList<User>();
 		this.seller = seller;
 		this.item = item;
-		this.precioActual=precioActual;
-		check(); 
-			
-			
-		
-		
+		this.precioActual = precioActual;
+		check();
 
 	}
-	
+
 	public int getPrecioActual() {
 		return precioActual;
 	}
 
 	public void setPrecioActual(int precioActual) {
 		check();
-		if (estado.equals(EstadoSubasta.INICIADO)){
+		if (estado.equals(EstadoSubasta.INICIADO)) {
 			this.precioActual = precioActual;
 		}
-		
+
 	}
 
 	public Item getItem() {
@@ -118,16 +135,14 @@ public class Auction implements Serializable {
 	public void setHoraFin(Date horaFinal) {
 		this.horaFinal = horaFinal;
 	}
-	
+
 	public void check() {
-		if(horaIni.getTime()<System.currentTimeMillis() && horaFinal.getTime()>System.currentTimeMillis()) {
-			estado=EstadoSubasta.INICIADO;
-		}
-		else if(horaFinal.getTime()<System.currentTimeMillis()) {
-			estado=EstadoSubasta.FINALIZADA;
-		}
-		else {
-			estado=EstadoSubasta.SUSPENDIDO;
+		if (horaIni.getTime() < System.currentTimeMillis() && horaFinal.getTime() > System.currentTimeMillis()) {
+			estado = EstadoSubasta.INICIADO;
+		} else if (horaFinal.getTime() < System.currentTimeMillis()) {
+			estado = EstadoSubasta.FINALIZADA;
+		} else {
+			estado = EstadoSubasta.SUSPENDIDO;
 		}
 	}
 

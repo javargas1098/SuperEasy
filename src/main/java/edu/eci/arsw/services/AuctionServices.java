@@ -29,7 +29,7 @@ public class AuctionServices implements IAuctionServices{
 	}
 	
 	@Override
-	public Long createItem(Item item) {
+	public String createItem(Item item) {
 		return auctionRepository.saveItem(item);
 	}
 

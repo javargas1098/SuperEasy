@@ -1,7 +1,8 @@
 package edu.eci.arsw.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+//import java.util.Date;
+import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,8 +20,10 @@ public class Auction implements Serializable {
 	String seller;
 	int precioSugerido, precioActual;
 	EstadoSubasta estado;
-	@JsonFormat(pattern = "MM/DD/YYYY HH:mm")
-	Date horaIni, horaFinal;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	Timestamp horaIni;
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+	Timestamp horaFinal;
 	Item item;
 
 	@Override
@@ -43,7 +46,7 @@ public class Auction implements Serializable {
 	public Auction() {
 	}
 
-	public Auction(long idSubasta, EstadoSubasta estado, Date horaIni, Date horaFinal, String seller,
+	public Auction(long idSubasta, EstadoSubasta estado, Timestamp horaIni, Timestamp horaFinal, String seller,
 			int precioSugerido, Item item, int precioActual) {
 
 		this.estado = estado;
@@ -119,19 +122,19 @@ public class Auction implements Serializable {
 		this.precioSugerido = precioSugerido;
 	}
 
-	public Date getHoraIni() {
+	public Timestamp getHoraIni() {
 		return horaIni;
 	}
 
-	public void setHoraIni(Date horaIni) {
+	public void setHoraIni(Timestamp horaIni) {
 		this.horaIni = horaIni;
 	}
 
-	public Date getHoraFin() {
+	public Timestamp getHoraFin() {
 		return horaFinal;
 	}
 
-	public void setHoraFin(Date horaFinal) {
+	public void setHoraFin(Timestamp horaFinal) {
 		this.horaFinal = horaFinal;
 	}
 

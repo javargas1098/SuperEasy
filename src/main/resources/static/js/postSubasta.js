@@ -5,25 +5,35 @@ postSubasta = (function() {
 	var yyyy = today.getFullYear();
 	var hour = String(today.getHours()).padStart(2, '0');
 	var minutes = String(today.getMinutes());
+	var UUID;
+	var UUIDJSON=$.ajax({
+		 		url : "https://helloacm.com/api/guid-generator/",
+		 		
+		 		success: function(data) {
+		 		UUID=data.guid[0];
+		 		}
+			});
 
-	today = (mm + '/' + dd + '/' + yyyy + "  " + hour + ':' + minutes);
-	var horaFinal = new Date();
-
+	// today = (yyyy + '/' + mm + '/' + dd + " " + hour + ':' + minutes);
+	// var horaFinal = new Date();
+	
 	return {
+		
 
 		postItem : function() {
 			var data = {
 				marca : $("#productmarca").val(),
 				modelo : $("#productmodel").val(),
-				descripcion : $("#productdescription").val()
+				descripcion : $("#productdescription").val(),
+				id: UUID
 
-			};
+			}
 			var datasubasta = {
 				seller : atob(window.localStorage.getItem('key')).split(":")[0],
 				precioSugerido : $("#productprice").val().toString(),
-				// horaFinal : today.toString(),
-				horaFinal : moment($('#productfecha').val()).format(
-						'MM/DD/YYYY HH:mm'),
+				horaFinal :new Date($('#productfecha').val()),
+// horaFinal : moment($('#productfecha').val()).format(
+// 'YYYY/MM/DD HH:mm'),
 				horaIni : today,
 				item : data
 
@@ -38,13 +48,13 @@ postSubasta = (function() {
 						data : JSON.stringify(data),
 						dataType : 'json',
 						success : function(data) {
-
+							
 							alert('Se creo, ');
 						},
-//						error : function() {
-//							alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
-//							// si se puede crear usuario pero tira esta alerta
-//						}
+// error : function() {
+// alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+// // si se puede crear usuario pero tira esta alerta
+// }
 					});
 			$
 					.ajax({
@@ -57,12 +67,14 @@ postSubasta = (function() {
 
 							alert('Se creo, ');
 						},
-//						error : function() {
-//							alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
-//							// si se puede crear usuario pero tira esta alerta
-//						}
+// error : function() {
+// alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+// // si se puede crear usuario pero tira esta alerta
+// }
 					});
-		}
+		},
+		
+		
 
 	}
 

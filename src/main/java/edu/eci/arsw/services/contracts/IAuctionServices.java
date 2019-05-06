@@ -12,7 +12,7 @@ import edu.eci.arsw.model.User;
 public interface IAuctionServices {
 	List<Auction> list();
     Long create(Auction auction);
-    Long createItem(Item item);
+    String createItem(Item item);
     Auction get(long id);
     void deleteAuction(Auction auction);
     void removeAuction(Auction auction);

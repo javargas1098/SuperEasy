@@ -15,7 +15,7 @@ CREATE TABLE Items (
     description varchar(250)  NOT NULL,
     marca varchar(20)  NOT NULL,
     modelo varchar(20)  NOT NULL,
-    item_id int  NOT NULL,
+    item_id varchar(40)  NOT NULL,
     CONSTRAINT Items_pk PRIMARY KEY (item_id)
 );
 
@@ -39,17 +39,17 @@ CREATE TABLE PayMethod (
 CREATE TABLE Subastas (
     id_subasta int  NOT NULL,
     estado int  NOT NULL,
-    hora_ini date  NOT NULL,
-    hora_fin date  NOT NULL,
+    hora_ini timestamp  NOT NULL,
+    hora_fin timestamp  NOT NULL,
     precio_sugerido int  NOT NULL,
     id_seller int  NOT NULL,
-    Items_item_id int  NOT NULL,
+    Items_item_id varchar(40)  NOT NULL,
     CONSTRAINT Subastas_pk PRIMARY KEY (id_subasta)
 );
 
 -- Table: Truque
 CREATE TABLE Truque (
-    item_id int  NOT NULL,
+    item_id varchar(40)  NOT NULL,
     tipo_id int  NOT NULL,
     CONSTRAINT Truque_pk PRIMARY KEY (item_id,tipo_id)
 );

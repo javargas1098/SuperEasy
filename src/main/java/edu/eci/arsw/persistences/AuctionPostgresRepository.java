@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,8 +55,8 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 				Auction auction = new Auction();
 				auction.setIdSubasta(Long.parseLong(rs.getString("id_subasta")));
 				auction.setEstado(EstadoSubasta.valueOf(rs.getString("estado")));
-				auction.setHoraIni((Date) new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_ini")));
-				auction.setHoraFin((Date) new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").parse(rs.getString("hora_fin")));
+				auction.setHoraIni((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
+				auction.setHoraFin((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
 				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
 				auction.setSeller(
 						UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
@@ -100,7 +101,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 			Item item = new Item();
 
-			item.setId(Long.parseLong(rs.getString("item_id")));
+			item.setId(rs.getString("item_id"));
 			item.setDescripcion(rs.getString("description"));
 			item.setMarca(rs.getString("marca"));
 			item.setModelo(rs.getString("modelo"));
@@ -120,13 +121,17 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	@Override
 	public Long save(Auction auction) {
-		System.out.println("///////////////////////////////////////////////////////////////////horas");
-		System.out.println(auction.getHoraFin());
-		System.out.println(auction.getHoraIni());
+		// YYYY-MM-DD HH:mm por si falla
+		System.out.println("///////////////////////////////////////////////////////////////////////////////////");
+		System.out.println(auction.toString());
+		System.out.println(auction.getItem().getId());
+		System.out.println(auction.getSeller());
+		System.out.println(UserPostgresRepository.getUserByEmail(auction.getSeller()));
+		System.out.println(UserPostgresRepository.getUserByEmail(auction.getSeller()).getId());
+		
 		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES((Select CASE WHEN EXISTS(SELECT id_subasta FROM subastas WHERE id_subasta=1) THEN max(id_subasta)+1 ELSE 1 END FROM subastas)"
-				+ ",'" + auction.getEstado() + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','dd/mm/yyyy hh24:mi'),TO_TIMESTAMP('" + auction.getHoraFin() + "','dd/mm/yyyy hh24:mi'),'"
-				+ auction.getPrecioSugerido() + "','" + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId()
-				+ auction.getItem().getId() + "');";
+				+ ",'" + 1 + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','YYYY-MM-DD HH24:MI:SS:MS'),TO_TIMESTAMP('" + auction.getHoraFin() + "','YYYY-MM-DD HH24:MI:SS:MS'),"
+				+ auction.getPrecioSugerido() + "," + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId() +",'"+ auction.getItem().getId() + "');";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -139,10 +144,10 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	}
 
 	@Override
-	public Long saveItem(Item item) {
-		String query = "INSERT into items(item_id,description,marca,modelo) VALUES("
-				+ "(Select CASE WHEN EXISTS(SELECT item_id FROM items WHERE item_id=1) THEN max(item_id)+1 ELSE 1 END FROM items)"
-				+ ",'" + item.getDescripcion() + "','" + item.getMarca() + "','" + item.getModelo() + "');";
+	public String saveItem(Item item) {
+		String query = "INSERT into items(item_id,description,marca,modelo) VALUES('"
+				+ item.getId()
+				+ "','" + item.getDescripcion() + "','" + item.getMarca() + "','" + item.getModelo() + "');";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);

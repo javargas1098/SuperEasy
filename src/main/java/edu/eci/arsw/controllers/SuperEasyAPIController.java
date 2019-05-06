@@ -60,7 +60,8 @@ public class SuperEasyAPIController {
 	@RequestMapping(value = "/saveAuction", method = RequestMethod.POST )
 	public ResponseEntity<?> saveSubasta(@RequestBody Auction auction) {
 		try {
-			System.out.println(auction.toString());
+			//System.out.println(auction.toString());
+			auctionServices.create(auction);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 		catch(Exception e){

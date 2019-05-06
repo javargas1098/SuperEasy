@@ -1,10 +1,10 @@
 package edu.eci.arsw.model;
 
 public class Item {
-	long id;
-	String descripcion, marca, modelo;
+	
+	String descripcion, marca, modelo,id;
 
-	public Item(long id, String descripcion, String marca, String modelo) {
+	public Item(String id, String descripcion, String marca, String modelo) {
 		this.descripcion = descripcion;
 		this.id = id;
 		this.marca = marca;
@@ -16,11 +16,11 @@ public class Item {
 	}
 	
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

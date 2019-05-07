@@ -20,7 +20,8 @@ post = (function() {
 					alert('Usuario creado exitosamente, Ya puede ingresar con sus datos');
 				},
 				error : function() {				
-					alert("Hay un error en los datos ingresados por favor intentelo nuevamente");
+					alert("Usuario creado exitosamente");
+					location.reload();
 					// si se puede crear usuario pero tira esta alerta
 				}
 			});

@@ -9,8 +9,8 @@ import edu.eci.arsw.model.User;
 import edu.eci.arsw.model.Item;
 
 @Repository
-public interface IAuctionRepository extends DAO<Auction, Long> {
-	List<User> getBidders(long idSubasta);
-	Item getItem(long idSubasta);
+public interface IAuctionRepository extends DAO<Auction, String> {
+	List<User> getBidders(String idSubasta);
+	Item getItem(String idSubasta);
 	String saveItem(Item item);
 }

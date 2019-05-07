@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,124 +22,116 @@ import edu.eci.arsw.services.contracts.IUserServices;
 @RequestMapping(value = "/superEasy")
 
 public class SuperEasyAPIController {
-	
+
 	@Autowired
 	private IUserServices userServices;
 	@Autowired
 	private IAuctionServices auctionServices;
 
-	@RequestMapping(value = "/saveUser", method = RequestMethod.POST )
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST)
 	public ResponseEntity<?> saveUser(@RequestBody User user) {
 		try {
 
 			userServices.create(user);
-			//System.out.println(user.getNumber());
+			// System.out.println(user.getNumber());
 			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
 		}
 
 	}
-	
-	@RequestMapping(value = "/saveItem", method = RequestMethod.POST )
+
+	@RequestMapping(value = "/saveItem", method = RequestMethod.POST)
 	public ResponseEntity<?> saveItem(@RequestBody Item item) {
 		try {
 
 			auctionServices.createItem(item);
 			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
 		}
 
 	}
-	@RequestMapping(value = "/saveAuction", method = RequestMethod.POST )
-	public ResponseEntity<?> saveSubasta(@RequestBody Auction auction) {
+
+	@RequestMapping(value = "/saveAuction/{id}", method = RequestMethod.POST)
+	public ResponseEntity<?> saveSubasta(@RequestBody Auction auction, @PathParam("id") String id) {
 		try {
-			//System.out.println(auction.toString());
+			System.out.println("//////////////////////////////////////////////////////////////////////");
 			auctionServices.create(auction);
 			return new ResponseEntity<>(HttpStatus.CREATED);
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("error",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
 		}
 
 	}
-	
-	@RequestMapping(value= "/user" , method= RequestMethod.GET)
-	public ResponseEntity<?> GetAllUsers(){
+
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public ResponseEntity<?> GetAllUsers() {
 		try {
-			return new ResponseEntity<>(userServices.list(),HttpStatus.OK);
-		}
-		catch(Exception e){
+			return new ResponseEntity<>(userServices.list(), HttpStatus.OK);
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("Error no Users Found",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("Error no Users Found", HttpStatus.NOT_FOUND);
+
 		}
-		
 	}
-	
-	@RequestMapping(value= "/credentials/{email}/{password}" , method= RequestMethod.GET)
-	public ResponseEntity<?> EvaluateCredentials(@PathVariable String email,@PathVariable String password){
+
+	@RequestMapping(value = "/credentials/{email}/{password}", method = RequestMethod.GET)
+	public ResponseEntity<?> EvaluateCredentials(@PathVariable String email, @PathVariable String password) {
 		try {
-			
+
 			User u = userServices.get(email);
-			if(u.getPassword().equals(password)) {
-				return new ResponseEntity<>(true,HttpStatus.OK);
+			if (u.getPassword().equals(password)) {
+				return new ResponseEntity<>(true, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(false, HttpStatus.OK);
 			}
-			else {
-				return new ResponseEntity<>(false,HttpStatus.OK);
-			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>(false,HttpStatus.OK);
-			
+			return new ResponseEntity<>(false, HttpStatus.OK);
+
 		}
-		
+
 	}
-	
-	@RequestMapping(value= "/user/{email}" , method= RequestMethod.GET)
-	public ResponseEntity<?> GetUser(@PathVariable String email){
+
+	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
+	public ResponseEntity<?> GetUser(@PathVariable String email) {
 		try {
 
-			return new ResponseEntity<>(userServices.get(email),HttpStatus.OK);
-		}
-		catch(Exception e){
+			return new ResponseEntity<>(userServices.get(email), HttpStatus.OK);
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("Error no User Found",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("Error no User Found", HttpStatus.NOT_FOUND);
+
 		}
 	}
-	@RequestMapping(value= "/user/{email}/name" , method= RequestMethod.GET)
-	public ResponseEntity<?> GetUserNameByEmail(@PathVariable String email){
+
+	@RequestMapping(value = "/user/{email}/name", method = RequestMethod.GET)
+	public ResponseEntity<?> GetUserNameByEmail(@PathVariable String email) {
 		try {
-			
-			return new ResponseEntity<>(userServices.get(email).getName(),HttpStatus.OK);
-		}
-		catch(Exception e){
+
+			return new ResponseEntity<>(userServices.get(email).getName(), HttpStatus.OK);
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("Error no User Found",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("Error no User Found", HttpStatus.NOT_FOUND);
+
 		}
 	}
-	
+
 	@GetMapping("/auctions")
 	public ResponseEntity<?> getAllAuctions() {
 		try {
-			return new ResponseEntity<>(auctionServices.list(),HttpStatus.OK);
-		}
-		catch(Exception e){
+			return new ResponseEntity<>(auctionServices.list(), HttpStatus.OK);
+		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
-			return new ResponseEntity<>("Error no Users Found",HttpStatus.NOT_FOUND);
-			
+			return new ResponseEntity<>("Error no Users Found", HttpStatus.NOT_FOUND);
+
 		}
 	}
 }

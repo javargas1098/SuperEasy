@@ -1,20 +1,20 @@
 package edu.eci.arsw.model;
 
 
-public class Ofertas {;
+public class Ofertas {
 
 	long ofertaID;
-	TipoDePago  tipoDePago;
-	Auction auction;
-	User user;
+	int  precio;
+	String auction;
+	String user;
 	
 	public Ofertas() {
 	}
 
-	public Ofertas(long ofertaID, TipoDePago tipoDePago, Auction auction, User user) {
+	public Ofertas(long ofertaID, int precio, String auction, String user) {
 		super();
 		this.ofertaID = ofertaID;
-		this.tipoDePago = tipoDePago;
+		this.precio = precio;
 		this.auction = auction;
 		this.user = user;
 	}
@@ -27,27 +27,29 @@ public class Ofertas {;
 		this.ofertaID = ofertaID;
 	}
 
-	public TipoDePago getTipoDePago() {
-		return tipoDePago;
-	}
+	
 
-	public void setTipoDePago(TipoDePago tipoDePago) {
-		this.tipoDePago = tipoDePago;
-	}
-
-	public Auction getAuction() {
+	public String getAuction() {
 		return auction;
 	}
 
-	public void setAuction(Auction auction) {
+	public int getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(int precio) {
+		this.precio = precio;
+	}
+
+	public void setAuction(String auction) {
 		this.auction = auction;
 	}
 
-	public User getUser() {
+	public String getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(String user) {
 		this.user = user;
 	}
 	

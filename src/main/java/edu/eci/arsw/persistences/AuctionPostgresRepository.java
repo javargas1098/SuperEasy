@@ -53,15 +53,18 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 			connection.close();
 			while (rs.next()) {
 				Auction auction = new Auction();
-				auction.setIdSubasta(Long.parseLong(rs.getString("id_subasta")));
+				auction.setIdSubasta(rs.getString("id_subasta"));
 				auction.setEstado(EstadoSubasta.valueOf(rs.getString("estado")));
-				auction.setHoraIni((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
-				auction.setHoraFin((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
+				auction.setHoraIni(
+						(Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
+				auction.setHoraFin(
+						(Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
 				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
+				auction.setPrecioActual(Integer.parseInt(rs.getString("precio_actual")));
 				auction.setSeller(
 						UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
-				auction.setBidders(getBidders(Long.parseLong(rs.getString("id_subasta"))));
-				auction.setItem(getItem(Long.parseLong(rs.getString("id_subasta"))));
+				auction.setBidders(getBidders(rs.getString("id_subasta")));
+				auction.setItem(getItem(rs.getString("id_subasta")));
 
 				auctions.add(auction);
 			}
@@ -73,7 +76,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	}
 
 	@Override
-	public List<User> getBidders(long idSubasta) {
+	public List<User> getBidders(String idSubasta) {
 		String query = "SELECT users_id WHERE id_subasta = " + idSubasta + " FROM bidders;";
 		List<User> users = new ArrayList<User>();
 		try (Connection connection = dataSource.getConnection()) {
@@ -92,7 +95,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	}
 
 	@Override
-	public Item getItem(long idSubasta) {
+	public Item getItem(String idSubasta) {
 		String query = "SELECT * WHERE id_subasta = " + idSubasta + " FROM items;";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
@@ -114,29 +117,23 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	}
 
 	@Override
-	public Auction find(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Long save(Auction auction) {
+	public void save(Auction auction) {
 		// YYYY-MM-DD HH:mm por si falla
-		System.out.println("///////////////////////////////////////////////////////////////////////////////////");
-		System.out.println(auction.toString());
-		System.out.println(auction.getItem().getId());
-		System.out.println(auction.getSeller());
-		System.out.println(UserPostgresRepository.getUserByEmail(auction.getSeller()));
-		System.out.println(UserPostgresRepository.getUserByEmail(auction.getSeller()).getId());
-		
-		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,id_seller,items_item_id) VALUES((Select CASE WHEN EXISTS(SELECT id_subasta FROM subastas WHERE id_subasta=1) THEN max(id_subasta)+1 ELSE 1 END FROM subastas)"
-				+ ",'" + 1 + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','YYYY-MM-DD HH24:MI:SS:MS'),TO_TIMESTAMP('" + auction.getHoraFin() + "','YYYY-MM-DD HH24:MI:SS:MS'),"
-				+ auction.getPrecioSugerido() + "," + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId() +",'"+ auction.getItem().getId() + "');";
+		System.out.println(
+				"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+		System.out.println(auction.getIdSubasta());
+		//System.out.println(UserPostgresRepository.getUserByEmail(auction.getSeller()).getId());
+
+		String query = "INSERT into subastas(id_subasta,estado,hora_ini,hora_fin,precio_sugerido,precio_actual,id_seller,items_item_id) VALUES('"+auction.getIdSubasta()
+				+ "','" + 1 + "',TO_TIMESTAMP('" + auction.getHoraIni() + "','YYYY-MM-DD HH24:MI:SS:MS'),TO_TIMESTAMP('"
+				+ auction.getHoraFin() + "','YYYY-MM-DD HH24:MI:SS:MS')," + auction.getPrecioSugerido() + ","
+				+ auction.getPrecioSugerido() + "," + UserPostgresRepository.getUserByEmail(auction.getSeller()).getId()
+				+ ",'" + auction.getItem().getId() + "');";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			connection.close();
-			return auction.getIdSubasta();
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
@@ -145,9 +142,8 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	@Override
 	public String saveItem(Item item) {
-		String query = "INSERT into items(item_id,description,marca,modelo) VALUES('"
-				+ item.getId()
-				+ "','" + item.getDescripcion() + "','" + item.getMarca() + "','" + item.getModelo() + "');";
+		String query = "INSERT into items(item_id,description,marca,modelo) VALUES('" + item.getId() + "','"
+				+ item.getDescripcion() + "','" + item.getMarca() + "','" + item.getModelo() + "');";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -187,6 +183,43 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 			config.setUsername(dbUsername);
 			config.setPassword(dbPassword);
 			return new HikariDataSource(config);
+		}
+	}
+
+	@Override
+	public Auction find(String id) {
+		String query = "SELECT * FROM subastas WHERE id_subasta =" + id + ";";
+		List<Auction> auctions = new ArrayList<Auction>();
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			connection.close();
+			Auction auction = new Auction();
+			auction.setIdSubasta(rs.getString("id_subasta"));
+			auction.setEstado(EstadoSubasta.valueOf(rs.getString("estado")));
+			auction.setHoraIni((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
+			auction.setHoraFin((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
+			auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
+			auction.setPrecioActual(Integer.parseInt(rs.getString("precio_actual")));
+			auction.setSeller(
+					UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
+			auction.setBidders(getBidders(rs.getString("id_subasta")));
+			auction.setItem(getItem(rs.getString("id_subasta")));
+
+			auctions.add(auction);
+
+			return auction;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw new RuntimeException(e);
+		}
+	}
+	public void Bid(String idsubasta,int newPrice) throws SQLException {
+		String query = "UPDATE subastas SET precio_actual="+newPrice+" WHERE idsubasta="+idsubasta+";";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			connection.close();
 		}
 	}
 }

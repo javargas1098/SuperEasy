@@ -15,7 +15,7 @@ public class Auction implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	long idSubasta;
+	String idSubasta;
 	List<User> bidders;
 	String seller;
 	int precioSugerido, precioActual;
@@ -46,7 +46,7 @@ public class Auction implements Serializable {
 	public Auction() {
 	}
 
-	public Auction(long idSubasta, EstadoSubasta estado, Timestamp horaIni, Timestamp horaFinal, String seller,
+	public Auction(String idSubasta, EstadoSubasta estado, Timestamp horaIni, Timestamp horaFinal, String seller,
 			int precioSugerido, Item item, int precioActual) {
 
 		this.estado = estado;
@@ -90,11 +90,11 @@ public class Auction implements Serializable {
 		this.bidders = bidders;
 	}
 
-	public long getIdSubasta() {
+	public String getIdSubasta() {
 		return idSubasta;
 	}
 
-	public void setIdSubasta(long idSubasta) {
+	public void setIdSubasta(String idSubasta) {
 		this.idSubasta = idSubasta;
 	}
 
@@ -138,14 +138,12 @@ public class Auction implements Serializable {
 		this.horaFinal = horaFinal;
 	}
 
-	public void check() {
+	public boolean check() {
 		if (horaIni.getTime() < System.currentTimeMillis() && horaFinal.getTime() > System.currentTimeMillis()) {
-			estado = EstadoSubasta.INICIADO;
-		} else if (horaFinal.getTime() < System.currentTimeMillis()) {
-			estado = EstadoSubasta.FINALIZADA;
-		} else {
-			estado = EstadoSubasta.SUSPENDIDO;
+			return true;
 		}
+		return false;
+		
 	}
 
 }

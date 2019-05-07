@@ -5,12 +5,20 @@ postSubasta = (function() {
 	var yyyy = today.getFullYear();
 	var hour = String(today.getHours()).padStart(2, '0');
 	var minutes = String(today.getMinutes());
-	var UUID;
+	var UUID,UUIDS;
+	var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 	var UUIDJSON = $.ajax({
 		url : "https://helloacm.com/api/guid-generator/",
 
 		success : function(data) {
 			UUID = data.guid[0];
+		}
+	});
+	var UUIDJSON2 = $.ajax({
+		url : "https://helloacm.com/api/guid-generator/",
+
+		success : function(data) {
+			UUIDS = data.guid[0];
 		}
 	});
 
@@ -30,13 +38,13 @@ postSubasta = (function() {
 			var datasubasta = {
 				seller : atob(window.localStorage.getItem('key')).split(":")[0],
 				precioSugerido : $("#productprice").val().toString(),
-				horaFinal : moment($('#productfecha').val()).format(
-						'MM/DD/YYYY HH:mm'),
-
+				horaFinal : new Date($('#productfecha').val()),
 				horaIni : today,
-				item : data
+				item : data,
+				idSubasta : UUIDS
 
 			};
+			console.log(datasubasta);
 			if (window.localStorage.getItem('key') != null) {
 				console.info(datasubasta);
 				// console.info(horaFin);
@@ -52,7 +60,7 @@ postSubasta = (function() {
 					},
 					error : function() {				
 						alert("item creado exitodamente");
-						location.reload();
+						//location.reload();
 						// si se puede crear usuario pero tira esta alerta
 					}
 
@@ -60,7 +68,7 @@ postSubasta = (function() {
 				$.ajax({
 					method : "POST",
 					contentType : "application/json",
-					url : "superEasy/saveAuction",
+					url : "superEasy/saveAuction/"+UUIDS,
 					data : JSON.stringify(datasubasta),
 					dataType : 'json',
 					success : function(data) {
@@ -69,11 +77,13 @@ postSubasta = (function() {
 					},
 					error : function() {				
 						alert("subasta creada exitosamente");
-						location.reload();
+						//location.reload();
 						// si se puede crear usuario pero tira esta alerta
 					}
 
 				});
+				console.log(queryString);
+				location.replace("subastaspreview.html?id="+UUIDS);
 			}else{
     			alert("debe estar logeado ");
     		};

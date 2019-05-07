@@ -89,7 +89,7 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Override
-	public Long save(User usuario) {
+	public void save(User usuario) {
 
 		String query = "INSERT into users(id_users,name,phone,email,password,jairitos,jairitosfavor,jairitoscongelados) VALUES((Select CASE WHEN EXISTS(SELECT id_users FROM users WHERE id_users=1) THEN max(id_users)+1 ELSE 1 END FROM users),'"
 				+ usuario.getName() + "','" + usuario.getNumber() + "','" + usuario.getEmail() + "','"
@@ -98,7 +98,7 @@ public class UserPostgresRepository implements IUserRepository {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			connection.close();
-			return usuario.getId();
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);

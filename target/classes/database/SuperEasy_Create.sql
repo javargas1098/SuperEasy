@@ -6,7 +6,7 @@
 CREATE TABLE Bidders (
     Id_bidder int  NOT NULL,
     users_Id int  NOT NULL,
-    id_subasta int  NOT NULL,
+    id_subasta varchar(40)  NOT NULL,
     CONSTRAINT Bidders_pk PRIMARY KEY (Id_bidder)
 );
 
@@ -37,11 +37,12 @@ CREATE TABLE PayMethod (
 
 -- Table: Subastas
 CREATE TABLE Subastas (
-    id_subasta int  NOT NULL,
+    id_subasta varchar(40)  NOT NULL,
     estado int  NOT NULL,
     hora_ini timestamp  NOT NULL,
     hora_fin timestamp  NOT NULL,
     precio_sugerido int  NOT NULL,
+    precio_actual int NOT NULL,
     id_seller int  NOT NULL,
     Items_item_id varchar(40)  NOT NULL,
     CONSTRAINT Subastas_pk PRIMARY KEY (id_subasta)

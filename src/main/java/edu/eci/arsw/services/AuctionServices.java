@@ -24,8 +24,9 @@ public class AuctionServices implements IAuctionServices{
 	}
 
 	@Override
-	public Long create(Auction auction) {
-		return auctionRepository.save(auction);
+	public void create(Auction auction) {
+		System.out.println("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
+		auctionRepository.save(auction);
 	}
 	
 	@Override
@@ -35,7 +36,7 @@ public class AuctionServices implements IAuctionServices{
 
 	@Override
 	public Auction get(long id) {
-		auctionRepository.find(id);
+		//auctionRepository.find(id);
 		return null;
 	}
 

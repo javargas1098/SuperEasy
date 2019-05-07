@@ -24,16 +24,22 @@ appuser=(function(){
 				var email=atob(window.localStorage.getItem('key')).split(":")[0];
 				apiUser.getUserbyEmail(email,function(u){
 					document.getElementById('userName').innerHTML=u;
+					document.getElementById('botonLogout').style.display="block";
+					
 				});
-				
-				
-				
-				
+			}
+			else{
+				document.getElementById('NuevoProducto').innerHTML="";
 			}
 		},
 		getUserCredential:function(){
 			console.info(window.localStorage.getItem('key')); //hash
 			console.info(atob(window.localStorage.getItem('key'))); //decifrado
+		},
+		logOut:function(){
+			window.localStorage.removeItem('key');
+			alert('se ha desconectado correctamente');
+			location.replace("index.html");
 		}
 		
 	}

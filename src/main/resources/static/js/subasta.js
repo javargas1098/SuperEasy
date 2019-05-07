@@ -24,13 +24,19 @@ var subasta=( function(){
     		subasta.product=product;
     	},
     	ofertar:function(value){
-    		var x = parseInt(document.getElementById("actualValue").textContent);
-    		if(value>x){
-    			stompClient.send("/app/"+subasta.product,{},JSON.stringify(value));
+    		if(window.localStorage.getItem('key')!=null){
+    			var x = parseInt(document.getElementById("actualValue").textContent);
+        		if(value>x){
+        			stompClient.send("/app/"+subasta.product,{},JSON.stringify(value));
+        		}
+        		else{
+        			alert("no se puede ofertar un valor menor");
+        		}
     		}
     		else{
-    			alert("no se puede ofertar un valor menor");
+    			alert("debe estar logeado para ofertar");
     		}
+    		
     		
     	},
     	updateValue:function(newValue){

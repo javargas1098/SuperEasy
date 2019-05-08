@@ -138,7 +138,7 @@ public class UserPostgresRepository implements IUserRepository {
 		try (Connection connection = dataSource.getConnection()) {
 			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			connection.close();
+			
 			if (rs.next()) {
 				user.setName(rs.getString("name"));
 				user.setId(Long.parseLong(rs.getString("id_users")));
@@ -148,13 +148,14 @@ public class UserPostgresRepository implements IUserRepository {
 				user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
 				user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
 				user.setPassword(rs.getString("password"));
-
+				connection.close();
 				return user;
 
 			} else {
-
+				connection.close();
 				return null;
 			}
+			
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -184,7 +185,7 @@ public class UserPostgresRepository implements IUserRepository {
 			user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
 			user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
 			user.setPassword(rs.getString("password"));
-			
+			connection.close();
 			return user;
 
 		} catch (Exception e) {

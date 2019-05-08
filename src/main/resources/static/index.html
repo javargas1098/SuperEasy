@@ -22,10 +22,10 @@
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
 </head>
 
-<body onload="appuser.getUser()">
+<body onload="appuser.getUser(); appuser.getSubastas()">
 
 
-	<div class="super_container">
+	<div class="super_container" >
 
 		<!-- Header -->
 
@@ -199,17 +199,17 @@
 
 								<li
 									class="d-flex flex-column justify-content-start align-items-center">
-									<div id="hour" class="timer_num">00</div>
+									<div id="hour" class="timer_num">12</div>
 									<div class="timer_unit">Horas</div>
 								</li>
 								<li
 									class="d-flex flex-column justify-content-start align-items-center">
-									<div id="minute" class="timer_num">00</div>
+									<div id="minute" class="timer_num">12</div>
 									<div class="timer_unit">Minutos</div>
 								</li>
 								<li
 									class="d-flex flex-column justify-content-start align-items-center">
-									<div id="second" class="timer_num">00</div>
+									<div id="second" class="timer_num">12</div>
 									<div class="timer_unit">Segundos</div>
 								</li>
 							</ul>
@@ -242,114 +242,37 @@
 				<div class="row schedule_row">
 
 					<!-- Schedule Column -->
-					<div class="col-lg-6 schedule_col">
-						<div class="schedule_container">
+					<div class="col-lg-6 schedule_col " >
+						<div class="schedule_container" >
 							<div class="schedule_title_bar schedule_title_bar_1 text-center">
-								Nuevas Subastas<span>Productos Nuevos</span>
+								Subastas<span>Todos los productos</span>
 							</div>
 							<div class="schedule_list" id="NuevasSubastas">
 								<!--   <script src=”js/nuevasSubastas.js”></script>-->
-								<ul>
+								<ul id="listaSubastas">
 									<li
-										class="d-flex flex-row align-items-center justify-content-start">
-										<div class="schedule_image">
-											<img src="images/iphoneX.jpg" alt="">
+										class='d-flex flex-row align-items-center justify-content-start'>
+										<div class='schedule_image'>
+											<img src='https://avatars3.githubusercontent.com/u/20839249?s=460&v=4' alt=''>
 										</div>
-										<div class="schedule_content">
-											<div class="schedule_time">20 Horas</div>
-											<div class="schedule_title">Iphone X</div>
-											<div class="schedule_info">
+										<div class='schedule_content'>
+											<div class='schedule_time'>20 Horas</div>
+											<div class='schedule_title'>Iphone X</div>
+											<div class='schedule_info'>
 												Venderdor: <a>Diana Ramirez</a>
 											</div>
 										</div>
+											
+										<button style=''position: absolute; right: 0;' class='btn btn-success loginFormElement'> Visitar</button>
+										
 									</li>
-									<li
-										class="d-flex flex-row align-items-center justify-content-start">
-										<div class="schedule_image">
-											<img src="images/s10.jpeg" alt="">
-										</div>
-										<div class="schedule_content">
-											<div class="schedule_time">48 Horas</div>
-											<div class="schedule_title">Samsung Galaxy s10</div>
-											<div class="schedule_info">
-												Venderdor: <a>Santiago Ruiz</a>
-											</div>
-										</div>
-									</li>
-									<li
-										class="d-flex flex-row align-items-center justify-content-start">
-										<div class="schedule_image">
-											<img src="images/maquinaescribir.jpg" alt="">
-										</div>
-										<div class="schedule_content">
-											<div class="schedule_time">
-												36 Horas
-												<div>
-													<div class="schedule_title">Maquina de escribir
-														antigua</div>
-													<div class="schedule_info">
-														Venderdor: <a>Laura Serra</a>
-													</div>
-												</div>
-									</li>
-									<li
-										class="d-flex flex-row align-items-center justify-content-start">
-										<div class="schedule_image">
-											<img src="images/armadura.jpg" alt="">
-										</div>
-										<div class="schedule_content">
-											<div class="schedule_time">12 Horas</div>
-											<div class="schedule_title">Armadura Antigua</div>
-											<div class="schedule_info">
-												Venderdor: <a>Rodrigo Gallego</a>
-											</div>
-										</div>
-									</li>
-
 								</ul>
 							</div>
 						</div>
 					</div>
 
 					<!-- Schedule Column -->
-					<div class="col-lg-6 schedule_col">
-						<div class="schedule_container">
-							<div class="schedule_title_bar schedule_title_bar_2 text-center">
-								Proximas a Terminar <span>Menos de una Hora</span>
-							</div>
-							<div class="schedule_list">
-								<ul>
-									<li
-										class="d-flex flex-row align-items-center justify-content-start">
-										<div class="schedule_image">
-											<img src="images/gibson.jpg" alt="">
-										</div>
-										<div class="schedule_content">
-											<div class="schedule_time">30 Minutos</div>
-											<div class="schedule_title">Guitarra GIbson</div>
-											<div class="schedule_info">
-												Venderdor: <a>Lucía Dominguez</a>
-											</div>
-										</div>
-									</li>
-									<li
-										class="d-flex flex-row align-items-center justify-content-start">
-										<div class="schedule_image">
-											<img src="images/ferrari488.jpg" alt="">
-										</div>
-										<div class="schedule_content">
-											<div class="schedule_time">30 Minutos</div>
-											<div class="schedule_title">Ferrari 488</div>
-											<div class="schedule_info">
-												Venderdor: <a>Manuel Campos</a>
-											</div>
-										</div>
-									</li>
-
-								</ul>
-							</div>
-						</div>
-					</div>
+					
 
 				</div>
 			</div>

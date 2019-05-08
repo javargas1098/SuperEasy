@@ -25,6 +25,12 @@ apiUser = (function() {
 				console.log(data);
 				callback(data);
 			});
+		},
+		getAllSubastas: function(callback){
+			$.get("superEasy/auctions",function(data){
+				console.log(data);
+				callback(data);
+			});
 		}
 		
 

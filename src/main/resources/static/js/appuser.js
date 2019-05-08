@@ -40,6 +40,37 @@ appuser=(function(){
 			window.localStorage.removeItem('key');
 			alert('se ha desconectado correctamente');
 			location.replace("index.html");
+		},
+		getSubastas:function(){
+			return apiUser.getAllSubastas(function(response){
+				for(var it in response){
+					console.log(response[it]);
+					var bid = document.createElement("LI");
+					var onclictext= '"location.href='+"'subastaspreview.html?id="+response[it].idSubasta+"'"+'"';
+					bid.className +="d-flex flex-row align-items-center justify-content-start";
+					var htmltext="<li class='d-flex flex-row align-items-center justify-content-start'>"+
+						"<div class='schedule_image'>"+
+											"<img src='https://avatars3.githubusercontent.com/u/20839249?s=460&v=4' alt=''>"+
+										"</div>"+
+										"<div class='schedule_content'>"+
+											"<div class='schedule_time'>20 Horas</div>"+
+											"<div class='schedule_title'>Iphone X</div>"+
+											"<div class='schedule_info'>"+
+												"Venderdor: <a>Diana Ramirez</a>"+
+											"</div>"+
+										"</div>"+
+											
+										"<button style=''position: absolute; right: 0;' class='btn btn-success loginFormElement' onclick="+
+										onclictext+
+										"> Visitar</button>;</li>";
+									
+				
+				var actual=document.getElementById("listaSubastas").innerHTML;
+				actual+=htmltext;
+				document.getElementById("listaSubastas").innerHTML=actual;
+				}
+				
+			});
 		}
 		
 	}

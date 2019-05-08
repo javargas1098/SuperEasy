@@ -6,7 +6,6 @@ postSubasta = (function() {
 	var hour = String(today.getHours()).padStart(2, '0');
 	var minutes = String(today.getMinutes());
 	var UUID,UUIDS;
-	var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 	var UUIDJSON = $.ajax({
 		url : "https://helloacm.com/api/guid-generator/",
 

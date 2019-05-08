@@ -19,7 +19,7 @@ public class Auction implements Serializable {
 	List<User> bidders;
 	String seller;
 	int precioSugerido, precioActual;
-	EstadoSubasta estado;
+	int estado;
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	Timestamp horaIni;
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -46,7 +46,7 @@ public class Auction implements Serializable {
 	public Auction() {
 	}
 
-	public Auction(String idSubasta, EstadoSubasta estado, Timestamp horaIni, Timestamp horaFinal, String seller,
+	public Auction(String idSubasta, int estado, Timestamp horaIni, Timestamp horaFinal, String seller,
 			int precioSugerido, Item item, int precioActual) {
 
 		this.estado = estado;
@@ -68,7 +68,7 @@ public class Auction implements Serializable {
 
 	public void setPrecioActual(int precioActual) {
 		check();
-		if (estado.equals(EstadoSubasta.INICIADO)) {
+		if (estado == 1) {
 			this.precioActual = precioActual;
 		}
 
@@ -98,11 +98,11 @@ public class Auction implements Serializable {
 		this.idSubasta = idSubasta;
 	}
 
-	public EstadoSubasta getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 
-	public void setEstado(EstadoSubasta estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 

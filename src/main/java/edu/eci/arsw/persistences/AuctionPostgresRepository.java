@@ -1,7 +1,6 @@
 package edu.eci.arsw.persistences;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,29 +44,31 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	@Override
 	public List<Auction> findAll() {
+		System.out.println("////////////////////////////////////////////aquiiiii");
 		String query = "SELECT * FROM subastas;";
 		List<Auction> auctions = new ArrayList<Auction>();
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			connection.close();
+			
 			while (rs.next()) {
 				Auction auction = new Auction();
 				auction.setIdSubasta(rs.getString("id_subasta"));
-				auction.setEstado(EstadoSubasta.valueOf(rs.getString("estado")));
-				auction.setHoraIni(
-						(Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
-				auction.setHoraFin(
-						(Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
-				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
-				auction.setPrecioActual(Integer.parseInt(rs.getString("precio_actual")));
-				auction.setSeller(
-						UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
-				auction.setBidders(getBidders(rs.getString("id_subasta")));
-				auction.setItem(getItem(rs.getString("id_subasta")));
+//				auction.setEstado(Integer.parseInt(rs.getString("estado")));
+//				auction.setHoraIni(
+//						(Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
+//				auction.setHoraFin(
+//						(Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
+//				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
+//				auction.setPrecioActual(Integer.parseInt(rs.getString("precio_actual")));
+//				auction.setSeller(
+//						UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
+//				auction.setBidders(getBidders(rs.getString("id_subasta")));
+//				auction.setItem(getItem(rs.getString("id_subasta")));
 
 				auctions.add(auction);
 			}
+			connection.close();
 			return auctions;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -196,7 +197,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 			connection.close();
 			Auction auction = new Auction();
 			auction.setIdSubasta(rs.getString("id_subasta"));
-			auction.setEstado(EstadoSubasta.valueOf(rs.getString("estado")));
+			auction.setEstado(Integer.parseInt(rs.getString("estado")));
 			auction.setHoraIni((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
 			auction.setHoraFin((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
 			auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));

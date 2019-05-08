@@ -1,5 +1,6 @@
 package edu.eci.arsw.services;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class UserServices implements IUserServices {
 	private IUserRepository userRepository;
 
 	@Override
-	public List<User> list() {
+	public List<User> list() throws SQLException {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public User create(User user) {
+	public User create(User user) throws SQLException {
 		if (null == user.getEmail())
 			throw new RuntimeException("Id invalid");
 		else if (userRepository.getUserByEmail(user.getEmail()) != null)
@@ -34,7 +35,7 @@ public class UserServices implements IUserServices {
 	}
 
 	@Override
-	public User get(String email) {
+	public User get(String email) throws SQLException {
 		
 		return userRepository.getUserByEmail(email);
 	}

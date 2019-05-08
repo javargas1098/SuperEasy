@@ -98,7 +98,7 @@ public class UserPostgresRepository implements IUserRepository {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			connection.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
@@ -131,13 +131,14 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Override
-	public User getUserByEmail(String email) {
-
+	public User getUserByEmail(String email) throws SQLException {
+		Statement stmt = null;
 		String query = "SELECT * FROM users WHERE email ='" + email + "';";
 		User user = new User();
 		try (Connection connection = dataSource.getConnection()) {
-			Statement stmt = connection.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
+			connection.close();
 			if (rs.next()) {
 				user.setName(rs.getString("name"));
 				user.setId(Long.parseLong(rs.getString("id_users")));
@@ -151,21 +152,28 @@ public class UserPostgresRepository implements IUserRepository {
 				return user;
 
 			} else {
+
 				return null;
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
 		}
 	}
 
 	@Override
-	public User getUserById(long idUser) {
+	public User getUserById(long idUser) throws SQLException {
+
+		Statement stmt = null;
 		String query = "SELECT * FROM users WHERE id_users =" + idUser + ";";
 		User user = new User();
 		try (Connection connection = dataSource.getConnection()) {
-			Statement stmt = connection.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 
 			user.setName(rs.getString("name"));
@@ -176,8 +184,8 @@ public class UserPostgresRepository implements IUserRepository {
 			user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
 			user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
 			user.setPassword(rs.getString("password"));
-
 			return user;
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);

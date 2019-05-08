@@ -1,6 +1,7 @@
 package edu.eci.arsw.services.contracts;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import edu.eci.arsw.model.User;
 
 @Service
 public interface IAuctionServices {
-	List<Auction> list() throws SQLException;
+	List<Auction> list() throws SQLException, ParseException;
     void create(Auction auction) throws SQLException;
     String createItem(Item item);
     Auction get(long id);

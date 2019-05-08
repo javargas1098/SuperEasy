@@ -1,6 +1,7 @@
 package edu.eci.arsw.services;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class UserServices implements IUserServices {
 	private IUserRepository userRepository;
 
 	@Override
-	public List<User> list() throws SQLException {
+	public List<User> list() throws SQLException, ParseException {
 		return userRepository.findAll();
 	}
 

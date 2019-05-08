@@ -1,6 +1,7 @@
 package edu.eci.arsw.services;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class AuctionServices implements IAuctionServices{
 	private IAuctionRepository auctionRepository;
 	
 	@Override
-	public List<Auction> list() throws SQLException {
+	public List<Auction> list() throws SQLException, ParseException {
 		return auctionRepository.findAll();
 	}
 

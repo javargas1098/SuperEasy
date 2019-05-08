@@ -169,13 +169,13 @@ public class UserPostgresRepository implements IUserRepository {
 	@Override
 	public User getUserById(long idUser) throws SQLException {
 
-		Statement stmt = null;
 		String query = "SELECT * FROM users WHERE id_users =" + idUser + ";";
-		User user = new User();
+		
 		try (Connection connection = dataSource.getConnection()) {
-			stmt = connection.createStatement();
+			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-
+			rs.next();
+			User user = new User();
 			user.setName(rs.getString("name"));
 			user.setId(Long.parseLong(rs.getString("id_users")));
 			user.setEmail(rs.getString("email"));
@@ -184,6 +184,7 @@ public class UserPostgresRepository implements IUserRepository {
 			user.setJairitosBenefit(Integer.parseInt(rs.getString("jairitosfavor")));
 			user.setJairitosCongelados(Integer.parseInt(rs.getString("jairitoscongelados")));
 			user.setPassword(rs.getString("password"));
+			
 			return user;
 
 		} catch (Exception e) {

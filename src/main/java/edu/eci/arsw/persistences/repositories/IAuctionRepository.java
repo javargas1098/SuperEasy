@@ -14,4 +14,5 @@ public interface IAuctionRepository extends DAO<Auction, String> {
 	List<User> getBidders(String idSubasta);
 	Item getItem(String idSubasta) throws SQLException;
 	String saveItem(Item item);
+	void Bid(String idsubasta, int newPrice) throws SQLException;
 }

@@ -224,12 +224,12 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 			throw new RuntimeException(e);
 		}
 	}
-
+	@Override
 	public void Bid(String idsubasta, int newPrice) throws SQLException {
-		String query = "UPDATE subastas SET precio_actual=" + newPrice + " WHERE idsubasta=" + idsubasta + ";";
+		String query = "UPDATE subastas SET precio_actual=" + newPrice + " WHERE id_subasta='" + idsubasta + "';";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
+			 stmt.executeUpdate(query);
 			connection.close();
 		}
 	}

@@ -1,1 +1,1 @@
-web: java -cp target/classes:target/dependency/* edu.eci.arsw.aplication.SuperEasyApiAplication
+web: java -jar target/arsw_project-1.0.jar

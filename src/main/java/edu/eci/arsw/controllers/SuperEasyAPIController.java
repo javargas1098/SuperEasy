@@ -56,6 +56,18 @@ public class SuperEasyAPIController {
 		}
 
 	}
+	
+	@GetMapping("/auction/{id}")
+	public ResponseEntity<?> getAuction(@PathVariable String id) {
+		try {
+			return new ResponseEntity<>(auctionServices.get(id), HttpStatus.OK);
+		} catch (Exception e) {
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
+		}
+
+	}
 
 	@RequestMapping(value = "/saveAuction/{id}", method = RequestMethod.POST)
 	public ResponseEntity<?> saveSubasta(@RequestBody Auction auction, @PathParam("id") String id) {
@@ -103,7 +115,7 @@ public class SuperEasyAPIController {
 	@RequestMapping(value = "/user/{email}", method = RequestMethod.GET)
 	public ResponseEntity<?> GetUser(@PathVariable String email) {
 		try {
-
+			
 			return new ResponseEntity<>(userServices.get(email), HttpStatus.OK);
 		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
@@ -115,7 +127,6 @@ public class SuperEasyAPIController {
 	@RequestMapping(value = "/user/{email}/name", method = RequestMethod.GET)
 	public ResponseEntity<?> GetUserNameByEmail(@PathVariable String email) {
 		try {
-
 			return new ResponseEntity<>(userServices.get(email).getName(), HttpStatus.OK);
 		} catch (Exception e) {
 			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);

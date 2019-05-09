@@ -12,7 +12,6 @@ postSubasta = (function() {
 
 		success : function(data) {
 			UUIDS = data.guid[0];
-			subasta.init(UUIDS,atob(window.localStorage.getItem('key')).split(":")[0]);
 			console.log(data.guid[0]);
 		}
 	});

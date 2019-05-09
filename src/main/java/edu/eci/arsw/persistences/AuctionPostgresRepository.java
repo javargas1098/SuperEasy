@@ -46,7 +46,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	private IUserRepository UserPostgresRepository;
 
 	@Override
-	public List<Auction> findAll() throws SQLException, ParseException {
+	public List<Auction> findAll() throws SQLException {
 		System.out.println("////////////////////////////////////////////aquiiiii");
 		String query = "SELECT * FROM subastas;";
 		List<Auction> auctions = new ArrayList<Auction>();
@@ -106,7 +106,6 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	@Override
 	public Item getItem(String idItem) throws SQLException {
-		System.out.println(idItem);
 		String query = "SELECT * FROM items WHERE item_id = '" + idItem + "';";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
@@ -200,26 +199,25 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	@Override
 	public Auction find(String id) {
-		String query = "SELECT * FROM subastas WHERE id_subasta =" + id + ";";
-		List<Auction> auctions = new ArrayList<Auction>();
+		String query = "SELECT * FROM subastas WHERE id_subasta ='" + id + "';";
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			connection.close();
+			rs.next();
 			Auction auction = new Auction();
 			auction.setIdSubasta(rs.getString("id_subasta"));
+			auction.setHoraIni(new Timestamp(
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("hora_ini")).getTime()));
+			auction.setHoraFin(new Timestamp(
+					new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("hora_fin")).getTime()));
 			auction.setEstado(Integer.parseInt(rs.getString("estado")));
-			auction.setHoraIni((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")));
-			auction.setHoraFin((Timestamp) new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")));
 			auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
 			auction.setPrecioActual(Integer.parseInt(rs.getString("precio_actual")));
 			auction.setSeller(
 					UserPostgresRepository.getUserById(Integer.parseInt(rs.getString("id_seller"))).getEmail());
 			auction.setBidders(getBidders(rs.getString("id_subasta")));
-			auction.setItem(getItem(rs.getString("id_subasta")));
-
-			auctions.add(auction);
-
+			auction.setItem(getItem(rs.getString("items_item_id")));
+			connection.close();
 			return auction;
 		} catch (Exception e) {
 			//System.out.println(e.getMessage());

@@ -37,9 +37,8 @@ public class AuctionServices implements IAuctionServices{
 	}
 
 	@Override
-	public Auction get(long id) {
-		//auctionRepository.find(id);
-		return null;
+	public Auction get(String id) {
+		return auctionRepository.find(id);
 	}
 
 	@Override

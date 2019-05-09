@@ -1,36 +1,41 @@
 var subasta=( function(){
-	class Bid{
-		constructor(value){
-			this.value=value;
+	class Ofertas{
+		constructor(ofertaID,precio,auction,user){
+			this.ofertaID=ofertaID;
+			this.precio=precio;
+			this.auction=auction;
+			this.user=user;
+			
 		}
 	}
 	var stompClient=null;
-	var idsubasta=null;
-	var user=null;
+	var idsubasta=window.location.href.split("=")[1];
+	var user=atob(window.localStorage.getItem('key')).split(":")[0];
 	var ConnectAndSubscribe = function (idsubasta,user) {  
 		//TODO pasar por el servidor (/app)
 		var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
         stompClient.connect({},function(frame){
-        	stompClient.subscribe('/topic/'+idsubasta+"/"+user, function (eventbody) {
+        	stompClient.subscribe('/topic/'+idsubasta, function (eventbody) {
                 var newValue=JSON.parse(eventbody.body);
                 console.log(newValue);
-                subasta.updateValue(newValue);
+                subasta.updateValue(newValue.precio);
             });
         });
     };
     return {
-    	init:function(idsubasta,user){
+    	init:function(){
+    		
     		ConnectAndSubscribe(idsubasta,user);
-    		subasta.idsubasta=idsubasta;
-    		subasta.user=user;
+    		
     	},
     	ofertar:function(value){
     		
     		if(window.localStorage.getItem('key')!=null){
     			var x = parseInt(document.getElementById("actualValue").textContent);
         		if(value>x){
-        			stompClient.send("/app/"+subasta.idsubasta+"/"+subasta.user,{},JSON.stringify(value));
+        			var newBid=new Ofertas(1,value,idsubasta,user);
+        			stompClient.send("/app/"+idsubasta,{},JSON.stringify(newBid));
         			
         		}
         		else{

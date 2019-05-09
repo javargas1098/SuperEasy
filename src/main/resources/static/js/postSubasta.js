@@ -89,8 +89,6 @@ postSubasta = (function() {
 					}
 
 				});
-				
-				subasta.ofertar($("#productprice").val().toString());
 				location.replace("subastaspreview.html?id="+UUIDS);
 				
 			}else{

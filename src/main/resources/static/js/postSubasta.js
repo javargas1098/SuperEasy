@@ -43,7 +43,8 @@ postSubasta = (function() {
 				horaFinal : new Date($('#productfecha').val()),
 				horaIni : today,
 				item : data,
-				idSubasta : UUIDS
+				idSubasta : UUIDS,
+				image:$("#productimage").val()
 
 			};
 			console.log(datasubasta);

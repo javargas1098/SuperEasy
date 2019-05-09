@@ -1,6 +1,7 @@
 var subastaConItem = (function() {
 	return {
 		llenar : function() {
+			
 			axios.get(
 					'/superEasy/auction/' + window.location.href.split('=')[1])
 					.then(function(response) {
@@ -94,13 +95,31 @@ var subastaConItem = (function() {
 						ul.appendChild(li);
 						
 						// Descripcion ---------------------------------------------------
+						// Imagen---------------------------------------------------------
+						$("#imageSubasta").empty();
+						document.getElementById("imageSubasta").innerHTML ='<img class="d-block w-100" src="'+json["image"]+'"alt="First slide">';
+							
+						// Imagen---------------------------------------------------------
 						
+						// hide button ---------------------------------------------------
+						var today=new Date();
+						var end=new Date(document.getElementById("fechaFin").textContent);
+						
+						
+						if(today>end){
+							
+							document.getElementById("ofertarButton").style.display="none";
+							document.getElementById("Bid").style.display="none";
+						}
+						// hide button ---------------------------------------------------
 						var par = document.getElementById("actualButton");
 						$(document).ready(function() {
 							$('#example').DataTable();
 						});
 
 					});
+			
+			
 
 		}
 	}

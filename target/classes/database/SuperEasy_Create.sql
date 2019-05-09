@@ -41,8 +41,10 @@ CREATE TABLE Subastas (
     estado int  NOT NULL,
     hora_ini timestamp  NOT NULL,
     hora_fin timestamp  NOT NULL,
+    image varchar(200) NOT NULL,
     precio_sugerido int  NOT NULL,
     precio_actual int NOT NULL,
+    ganador_actual varchar(50) , 
     id_seller int  NOT NULL,
     Items_item_id varchar(40)  NOT NULL,
     CONSTRAINT Subastas_pk PRIMARY KEY (id_subasta)
@@ -59,7 +61,7 @@ CREATE TABLE Truque (
 CREATE TABLE Users (
     id_users int  NOT NULL,
     name varchar(50)  NOT NULL,
-    email varchar(50)  NOT NULL,
+    email varchar(50)  NOT NULL unique,
     phone int  NOT NULL,
     jairitos int  NOT NULL,
     jairitosFavor int  NOT NULL,

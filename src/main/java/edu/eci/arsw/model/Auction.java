@@ -18,6 +18,8 @@ public class Auction implements Serializable {
 	String idSubasta;
 	List<User> bidders;
 	String seller;
+	String image;
+	String ganadorActual;
 	int precioSugerido, precioActual;
 	int estado;
 	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
@@ -26,6 +28,22 @@ public class Auction implements Serializable {
 	Timestamp horaFinal;
 	Item item;
 
+	public String getImage() {
+		return image;
+	}
+
+	public String getGanadorActual() {
+		return ganadorActual;
+	}
+
+	public void setGanadorActual(String ganadorActual) {
+		this.ganadorActual = ganadorActual;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		String respuesta = "ID: " + idSubasta + "\n" +
@@ -33,11 +51,13 @@ public class Auction implements Serializable {
 				"Seller: " + seller + "\n" +
 				"PrecioSugerido: " + precioSugerido + "\n" +
 				"PrecioActual: " + precioActual + "\n" +
+				"ganadorActual: " + ganadorActual + "\n" +
 				"EstadoSubasta: " + estado + "\n" +
 				"HoraInicio: " + horaIni + "\n" +
 				"HoraFin: " + horaFinal + "\n" +
 				"MarcaItem: " + item.getMarca() + "\n" +
 				"DescripcionItem: " + item.getDescripcion() + "\n" +
+				"image: " + image + "\n" +
 				"ModeloItem: " + item.getModelo() + "\n";
 				
 		return respuesta;

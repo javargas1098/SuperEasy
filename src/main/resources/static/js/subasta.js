@@ -20,6 +20,8 @@ var subasta=( function(){
                 var newValue=JSON.parse(eventbody.body);
                 console.log(newValue);
                 subasta.updateValue(newValue.precio);
+                var element= document.getElementById("actualWinner");
+        		element.innerHTML = newValue.user;
             });
         });
     };

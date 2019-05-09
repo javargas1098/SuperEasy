@@ -47,7 +47,7 @@ appuser = (function() {
 		getSubastas : function() {
 			return apiUser
 					.getAllSubastas(function(response) {
-						console.log("Javi la perra");
+						
 						var today = new Date();
 						for ( var it in response) {
 							console.log(response[it]);
@@ -65,7 +65,7 @@ appuser = (function() {
 								bid.className += "d-flex flex-row align-items-center justify-content-start";
 								var htmltext = "<li class='d-flex flex-row align-items-center justify-content-start'>"
 										+ "<div class='schedule_image'>"
-										+ "<img src='https://avatars3.githubusercontent.com/u/20839249?s=460&v=4' alt=''>"
+										+ "<img src='"+response[it].image+"' alt=''>"
 										+ "</div>"
 										+ "<div class='schedule_content'>"
 										+ "<div class='schedule_time'>"

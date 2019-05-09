@@ -36,16 +36,15 @@ public class StompBidHandler {
 			bids.put(idsubasta,ofertaActual);
 		}
 		synchronized(bids.get(idsubasta)) {
-			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			Auction a = apr.find(idsubasta);
-			System.out.println(a);
 			if (a.check()) {
-				apr.Bid(idsubasta,newB.getPrecio() );
+				apr.Bid(idsubasta,newB.getPrecio(),newB.getUser() );
 				bids.get(idsubasta).setUser(newB.getUser());
 				bids.get(idsubasta).setPrecio(newB.getPrecio());
+				msgt.convertAndSend("/topic/"+idsubasta, newB);
 				
 			}
-			msgt.convertAndSend("/topic/"+idsubasta, newB);
+			
 		}
 		
 	}

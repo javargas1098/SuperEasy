@@ -40,10 +40,10 @@
 						<li data-target="#carouselExampleIndicators" data-slide-to="0"
 							class="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+						
 					</ol>
 					<div class="carousel-inner">
-						<div class="carousel-item active">
+						<div class="carousel-item active" id="imageSubasta">
 							<img class="d-block w-100" src="images/martillo.jpg"
 								alt="First slide">
 						</div>
@@ -51,10 +51,7 @@
 							<img class="d-block w-100" src="images/martillo.jpg"
 								alt="Second slide">
 						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" src="images/martillo.jpg"
-								alt="Third slide">
-						</div>
+						
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
 						role="button" data-slide="prev"> <span
@@ -76,6 +73,8 @@
 					<div class="container">
 						<h1 class="display-4">Valor Actual</h1>
 						<h3 id="actualValue"></h3>
+						<h1 class="display-4">Ganador Actual</h1>
+						<h3 id="actualWinner"></h3>
 					</div>
 				</div>
 			</div>
@@ -88,6 +87,7 @@
 						<h4 id="fechaInicio"></h4>
 						<h1 class="display-4">Fecha Fin</h1>
 						<h4 id="fechaFin"></h4>
+						
 					</div>
 
 				</div>
@@ -95,9 +95,8 @@
 					<input id="Bid" name="" type="number" placeholder="Amount"
 						class="form-control input-md" aria-describedby="basic-addon1"
 						required="">
-					<button type="submit" class="btn btn-danger"
-						onclick="subasta.ofertar($('#Bid').val());return false;">BID
-						NOW</button>
+					<button type="submit" class="btn btn-danger" id="ofertarButton"
+						onclick="subasta.ofertar($('#Bid').val());return false;">OFERTAR</button>
 				</div>
 			</div>
 		</div>
@@ -113,7 +112,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse1"> Complete Description</a>
+									href="#collapse1">Descripcion</a>
 							</h4>
 						</div>
 						<div id="collapse1" class="panel-collapse collapse in">
@@ -126,7 +125,7 @@
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a data-toggle="collapse" data-parent="#accordion"
-									href="#collapse2"> My Auction Details</a>
+									href="#collapse2"> Detalles de la subasta</a>
 							</h4>
 						</div>
 						<div id="collapse2" class="panel-collapse collapse">

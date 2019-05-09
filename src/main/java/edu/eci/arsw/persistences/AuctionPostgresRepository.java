@@ -184,18 +184,18 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	}
 
-	@Bean
-	private DataSource dataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			config.setUsername(dbUsername);
-			config.setPassword(dbPassword);
-			return new HikariDataSource(config);
-		}
-	}
+//	@Bean
+//	private DataSource dataSource() throws SQLException {
+//		if (dbUrl == null || dbUrl.isEmpty()) {
+//			return new HikariDataSource();
+//		} else {
+//			HikariConfig config = new HikariConfig();
+//			config.setJdbcUrl(dbUrl);
+//			config.setUsername(dbUsername);
+//			config.setPassword(dbPassword);
+//			return new HikariDataSource(config);
+//		}
+//	}
 
 	@Override
 	public Auction find(String id) {

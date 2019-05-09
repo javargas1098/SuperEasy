@@ -46,7 +46,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	private IUserRepository UserPostgresRepository;
 
 	@Override
-	public List<Auction> findAll() throws SQLException, ParseException {
+	public List<Auction> findAll() throws SQLException {
 		System.out.println("////////////////////////////////////////////aquiiiii");
 		String query = "SELECT * FROM subastas;";
 		List<Auction> auctions = new ArrayList<Auction>();

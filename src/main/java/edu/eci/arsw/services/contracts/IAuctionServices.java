@@ -12,7 +12,7 @@ import edu.eci.arsw.model.User;
 
 @Service
 public interface IAuctionServices {
-	List<Auction> list() throws SQLException, ParseException;
+	List<Auction> list() throws SQLException;
     void create(Auction auction) throws SQLException;
     String createItem(Item item);
     Auction get(long id);

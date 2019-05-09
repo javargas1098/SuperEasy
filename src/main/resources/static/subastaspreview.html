@@ -13,10 +13,12 @@
 <!------ Include the above in your HEAD tag ---------->
 
 
+    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+
 
 
 </head>
-<body >
+<body onLoad="subastaConItem.setTable()">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -79,50 +81,26 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				<div class="product-widget ">
-					<ul class="list-group">
 
-						<li class="list-group-item"><span class="badge">1 Day
-						</span> Auction Ends in</li>
-						<li class="list-group-item"><span class="badge">2012</span>
-							Manufacture Year</li>
-						<li class="list-group-item"><span class="badge">Diesel
-						</span> Fuel Type</li>
-						<li class="list-group-item"><span class="badge">N/A</span>Permit</li>
-						<li class="list-group-item"><span class="badge">One</span>Owner</li>
-						<li class="list-group-item"><span class="badge">Silver</span>
-							Color</li>
-						<li class="list-group-item"><span class="badge">No</span>
-							Superdari</li>
-						<li class="list-group-item"><span class="badge">Yes,
-								Available</span>RC Status</li>
-						<li class="list-group-item"><span class="badge">N/A</span>
-							Tax Validity</li>
-						<li class="list-group-item"><span class="badge">N/A</span>Fitness
-							Validity</li>
-						<li class="list-group-item"><span class="badge">N/A</span>Permit
-							Validity</li>
-					</ul>
-				</div>
 				<p>
 				<div class="input-group">
-					<form class="form-inline">
-						<div class="form-group">
-							<input id="Bid" name="" type="number" placeholder="Amount"
-								class="form-control input-md" aria-describedby="basic-addon1"
-								required="">
-						</div>
-						<div class="input-group-append">
-
-							<button type="submit" class="btn btn-danger"
-								onclick="subasta.ofertar($('#Bid').val());return false;">BID
-								NOW</button>
-						</div>
-					</form>
+					<form class="form-inline" style="margin-top: 270px"
+						;
+						&lt;div class="form-group">
 				</div>
+				<div class="input-group-append">
+					<input id="Bid" name="" type="number" placeholder="Amount"
+						class="form-control input-md" aria-describedby="basic-addon1"
+						required="">
+					<button type="submit" class="btn btn-danger"
+						onclick="subasta.ofertar($('#Bid').val());return false;">BID
+						NOW</button>
+				</div>
+				</form>
 			</div>
-
 		</div>
+
+	</div>
 
 	</div>
 	<hr>
@@ -159,33 +137,35 @@
 									href="#collapse2"> My Bid Details</a>
 							</h4>
 						</div>
-						<div id="collapse2" class="panel-collapse collapse">
+						<div id="" class="panel-collapse collapse">
 							<div class="panel-body">
-								<table class="table table-hover">
+								<table class="table table-hover" id="example">
 									<thead>
 										<tr>
-											<th>Bid Date & Time</th>
-											<th>Bid Amount</th>
-											<th>Status</th>
+											<th>seller</th>
+											<th>precioSugerido</th>
+											<th>precioActual</th>
+											<th>marca</th>
+											<th>modelo</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>25/01/2018</td>
-											<td>260000</td>
-											<td>Winning</td>
-										</tr>
-										<tr>
-											<td>25/01/2018</td>
-											<td>260000</td>
-											<td>Winning</td>
-										</tr>
-										<tr>
-											<td>25/01/2018</td>
-											<td>260000</td>
-											<td>Winning</td>
-										</tr>
-									</tbody>
+<!-- 									<tbody> -->
+<!-- 										<tr> -->
+<!-- 											<td>25/01/2018</td> -->
+<!-- 											<td>260000</td> -->
+<!-- 											<td>Winning</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td>25/01/2018</td> -->
+<!-- 											<td>260000</td> -->
+<!-- 											<td>Winning</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td>25/01/2018</td> -->
+<!-- 											<td>260000</td> -->
+<!-- 											<td>Winning</td> -->
+<!-- 										</tr> -->
+<!-- 									</tbody> -->
 								</table>
 
 							</div>
@@ -226,9 +206,13 @@
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
 	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-	<script src="js/subasta.js"></script>
+	
+	
 	<script src="js/jquery-3.3.1.min.js"></script>
+	    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
 	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
+	<script src="js/subastaConItem.js"></script>
+	<script src="js/subasta.js"></script>
 </body>
 
 

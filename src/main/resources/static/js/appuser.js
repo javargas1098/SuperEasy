@@ -47,6 +47,7 @@ appuser = (function() {
 		getSubastas : function() {
 			return apiUser
 					.getAllSubastas(function(response) {
+						console.log("Javi la perra");
 						var today = new Date();
 						for ( var it in response) {
 							console.log(response[it]);

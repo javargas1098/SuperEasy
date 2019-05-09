@@ -58,7 +58,7 @@ appuser = (function() {
 
 							console.log(left);
 
-							if (left > 0) {
+							if (left >= 0) {
 								var onclictext = '"location.href='
 										+ "'subastaspreview.html?id="
 										+ response[it].idSubasta + "'" + '"';

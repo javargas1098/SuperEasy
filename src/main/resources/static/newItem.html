@@ -10,7 +10,7 @@
 <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 </head>
-<body onload="appuser.getUserCredential()">
+<body onload="postSubasta.possibleNew()">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -69,6 +69,7 @@
 						<button type="submit" id=""
 							class="btn btn-success loginFormElement"
 							onclick="postSubasta.postItem();return false;">Add Product</button>
+						<p id="actualValue" hidden>0</p>
 
 					</div>
 				</form>
@@ -83,7 +84,10 @@
 	<script src="styles/bootstrap-4.1.2/popper.js"></script>
 	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 	<script src="https://momentjs.com/downloads/moment.min.js"></script>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
 	<script src="js/postSubasta.js"></script>
+	<script src="js/subasta.js"></script>
 	<script src="js/appuser.js"></script>
 	<script src="js/apiUser.js"></script>
 </body>

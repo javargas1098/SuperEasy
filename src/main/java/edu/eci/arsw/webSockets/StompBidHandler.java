@@ -24,17 +24,18 @@ public class StompBidHandler {
 	public void handlePointEvent(int newValue,@DestinationVariable String idsubasta,@DestinationVariable String idUser) throws Exception {
 		//ConcurrentMap guarantees memory consistency on key/value operations in a multi-threading environment.
 		if(!bids.containsKey(idsubasta)) {
+			System.out.println("subasta creada con id:"+idsubasta+" y valor incial"+newValue);
 			Ofertas ofertaActual= new Ofertas(1,newValue,idsubasta,idUser);
 			bids.put(idsubasta,ofertaActual);
 		}
 		synchronized(bids.get(idsubasta)) {
-//			Auction a = apr.find(idsubasta);
-//			if (a.check()) {
-//				apr.Bid(idsubasta, newValue);
-//				bids.get(idsubasta).setUser(idUser);
-//				bids.get(idsubasta).setPrecio(newValue);
-//				
-//			}
+			Auction a = apr.find(idsubasta);
+		if (a.check()) {
+			apr.Bid(idsubasta, newValue);
+			bids.get(idsubasta).setUser(idUser);
+			bids.get(idsubasta).setPrecio(newValue);
+				
+		}
 			msgt.convertAndSend("/topic/"+idsubasta+"/"+idUser, newValue);
 		}
 		

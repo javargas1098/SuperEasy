@@ -5,13 +5,14 @@ var subasta=( function(){
 		}
 	}
 	var stompClient=null;
-	var product=null;
-	var ConnectAndSubscribe = function (product) {  
+	var idsubasta=null;
+	var user=null;
+	var ConnectAndSubscribe = function (idsubasta,user) {  
 		//TODO pasar por el servidor (/app)
 		var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
         stompClient.connect({},function(frame){
-        	stompClient.subscribe('/topic/1/1', function (eventbody) {
+        	stompClient.subscribe('/topic/'+idsubasta+"/"+user, function (eventbody) {
                 var newValue=JSON.parse(eventbody.body);
                 console.log(newValue);
                 subasta.updateValue(newValue);
@@ -19,15 +20,17 @@ var subasta=( function(){
         });
     };
     return {
-    	init:function(product){
-    		ConnectAndSubscribe(product);
-    		subasta.product=product;
+    	init:function(idsubasta,user){
+    		ConnectAndSubscribe(idsubasta,user);
+    		subasta.idsubasta=idsubasta;
+    		subasta.user=user;
     	},
     	ofertar:function(value){
+    		
     		if(window.localStorage.getItem('key')!=null){
     			var x = parseInt(document.getElementById("actualValue").textContent);
         		if(value>x){
-        			stompClient.send("/app/1/1",{},JSON.stringify(value));
+        			stompClient.send("/app/"+subasta.idsubasta+"/"+subasta.user,{},JSON.stringify(value));
         			
         		}
         		else{

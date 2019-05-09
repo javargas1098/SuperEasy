@@ -60,9 +60,9 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 				Auction auction = new Auction();
 				auction.setIdSubasta(rs.getString("id_subasta"));
 				auction.setHoraIni(new Timestamp(
-						new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_ini")).getTime()));
+						new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("hora_ini")).getTime()));
 				auction.setHoraFin(new Timestamp(
-						new SimpleDateFormat("YYYY-MM-DD HH:mm").parse(rs.getString("hora_fin")).getTime()));
+						new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(rs.getString("hora_fin")).getTime()));
 				auction.setEstado(Integer.parseInt(rs.getString("estado")));
 				auction.setPrecioSugerido(Integer.parseInt(rs.getString("precio_sugerido")));
 				auction.setPrecioActual(Integer.parseInt(rs.getString("precio_actual")));
@@ -222,7 +222,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 			return auction;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			//System.out.println(e.getMessage());
 			throw new RuntimeException(e);
 		}
 	}

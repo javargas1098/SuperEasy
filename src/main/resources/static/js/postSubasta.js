@@ -6,6 +6,16 @@ postSubasta = (function() {
 	var hour = String(today.getHours()).padStart(2, '0');
 	var minutes = String(today.getMinutes());
 	var UUID,UUIDS;
+	
+	var UUIDJSON2 = $.ajax({
+		url : "https://helloacm.com/api/guid-generator/",
+
+		success : function(data) {
+			UUIDS = data.guid[0];
+			subasta.init(UUIDS,atob(window.localStorage.getItem('key')).split(":")[0]);
+			console.log(data.guid[0]);
+		}
+	});
 	var UUIDJSON = $.ajax({
 		url : "https://helloacm.com/api/guid-generator/",
 
@@ -13,17 +23,11 @@ postSubasta = (function() {
 			UUID = data.guid[0];
 		}
 	});
-	var UUIDJSON2 = $.ajax({
-		url : "https://helloacm.com/api/guid-generator/",
-
-		success : function(data) {
-			UUIDS = data.guid[0];
-		}
-	});
-
+	
 	// today = (yyyy + '/' + mm + '/' + dd + " " + hour + ':' + minutes);
 	// var horaFinal = new Date();
 
+	
 	return {
 
 		postItem : function() {
@@ -44,7 +48,12 @@ postSubasta = (function() {
 
 			};
 			console.log(datasubasta);
+			console.log(UUIDS);
+			console.log(atob(window.localStorage.getItem('key')).split(":")[0]);
+			
 			if (window.localStorage.getItem('key') != null) {
+				
+				
 				console.info(datasubasta);
 				// console.info(horaFin);
 				$.ajax({
@@ -81,12 +90,20 @@ postSubasta = (function() {
 					}
 
 				});
+				
+				subasta.ofertar($("#productprice").val().toString());
 				location.replace("subastaspreview.html?id="+UUIDS);
+				
 			}else{
     			alert("debe estar logeado ");
     		};
     		
 		},
+		possibleNew:function(){
+			
+			
+			
+		}
 
 	}
 

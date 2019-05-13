@@ -15,6 +15,5 @@ public interface IUserRepository extends DAO<User, Long>  {
 	User getUserById(long idUser) throws SQLException;
 	void updateJairitos(String email,int value) throws SQLException;
 	void updateCongelados(String email,int value) throws SQLException;
-	public DataSource getDataSource();
 
 }

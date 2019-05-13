@@ -31,10 +31,6 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Autowired
 	private DataSource dataSource;
-	
-	public DataSource getDataSource() {
-		return dataSource;
-	}
 
 	@Override
 	public List<User> findAll() {

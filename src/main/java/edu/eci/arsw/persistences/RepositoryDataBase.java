@@ -22,8 +22,7 @@ public class RepositoryDataBase {
 	@Value("${spring.datasource.password}")
 	private String dbPassword;
 	
-	@Autowired
-	private DataSource dataSource;
+	
 	
 	@Bean
 	public DataSource dataSource() throws SQLException {

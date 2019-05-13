@@ -27,7 +27,7 @@ public class AuctionServices implements IAuctionServices{
 
 	@Override
 	public void create(Auction auction) throws SQLException {
-		System.out.println("ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
+		
 		auctionRepository.save(auction);
 	}
 	

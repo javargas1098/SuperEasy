@@ -196,19 +196,19 @@ public class UserPostgresRepository implements IUserRepository {
 		}
 	}
 
-	@Bean
-	private DataSource dataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			config.setUsername(dbUsername);
-			config.setPassword(dbPassword);
-			config.setMaximumPoolSize(2);
-			return new HikariDataSource(config);
-		}
-	}
+//	@Bean
+//	private DataSource dataSource() throws SQLException {
+//		if (dbUrl == null || dbUrl.isEmpty()) {
+//			return new HikariDataSource();
+//		} else {
+//			HikariConfig config = new HikariConfig();
+//			config.setJdbcUrl(dbUrl);
+//			config.setUsername(dbUsername);
+//			config.setPassword(dbPassword);
+//			config.setMaximumPoolSize(2);
+//			return new HikariDataSource(config);
+//		}
+//	}
 
 	@Override
 	public void updateJairitos(String email, int value) throws SQLException {

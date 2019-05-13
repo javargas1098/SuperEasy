@@ -33,33 +33,12 @@ import javassist.bytecode.ExceptionsAttribute;
 @Component
 @Qualifier("AuctionPostgresRepository")
 public class AuctionPostgresRepository implements IAuctionRepository {
-	@Value("${spring.datasource.url}")
-	private String dbUrl;
-	@Value("${spring.datasource.username}")
-	private String dbUsername;
-	@Value("${spring.datasource.password}")
-	private String dbPassword;
 	
 	@Autowired
 	private IUserRepository UserPostgresRepository;
 	
-	private DataSource dataSource = UserPostgresRepository.getDataSource();
-	
-	
-	
-//	@Bean
-//	private DataSource dataSource() throws SQLException {
-//		if (dbUrl == null || dbUrl.isEmpty()) {
-//			return new HikariDataSource();
-//		} else {
-//			HikariConfig config = new HikariConfig();
-//			config.setJdbcUrl(dbUrl);
-//			config.setUsername(dbUsername);
-//			config.setPassword(dbPassword);
-//			config.setMaximumPoolSize(2);
-//			return new HikariDataSource(config);
-//		}
-//	}
+	@Autowired
+	private DataSource dataSource;
 	
 	@Override
 	public List<Auction> findAll() throws SQLException {

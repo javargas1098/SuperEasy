@@ -27,12 +27,7 @@ import java.util.List;
 @Qualifier("UserPostgresRepository")
 public class UserPostgresRepository implements IUserRepository {
 
-	@Value("${spring.datasource.url}")
-	private String dbUrl;
-	@Value("${spring.datasource.username}")
-	private String dbUsername;
-	@Value("${spring.datasource.password}")
-	private String dbPassword;
+	
 
 	@Autowired
 	private DataSource dataSource;
@@ -197,20 +192,6 @@ public class UserPostgresRepository implements IUserRepository {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			throw new RuntimeException(e);
-		}
-	}
-
-	@Bean
-	public DataSource dataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			config.setUsername(dbUsername);
-			config.setPassword(dbPassword);
-			config.setMaximumPoolSize(2);
-			return new HikariDataSource(config);
 		}
 	}
 

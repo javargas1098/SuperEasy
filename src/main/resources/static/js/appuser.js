@@ -66,7 +66,7 @@ appuser = (function() {
 									.getTime()) / 3600000);
 
 							
-							if (!left >= 0) {
+							if (left < 0) {
 								var onclictext = '"location.href='
 										+ "'subastaspreview.html?id="
 										+ response[it].idSubasta + "'" + '"';

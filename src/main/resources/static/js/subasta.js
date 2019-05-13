@@ -39,7 +39,7 @@ var subasta=( function(){
 						console.log(response.data);
 						var json = response.data;
 						if(window.localStorage.getItem('key')!=null){
-			    			var x = parseInt(document.getElementById("actualValue").textContent);
+			    			var x = parseInt(document.getElementById("actualValue").textContent.split(" ")[1]);
 			    			console.log(" actual: "+x+" oferta:"+value+"   dispone de:"+json["jairitos"]);
 			    			console.log(parseInt(value)>x);
 			    			console.log(parseInt(json["jairitos"])>parseInt(value));

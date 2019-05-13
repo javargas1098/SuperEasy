@@ -66,7 +66,45 @@ appuser = (function() {
 									.getTime()) / 3600000);
 
 							
+							if (!left >= 0) {
+								var onclictext = '"location.href='
+										+ "'subastaspreview.html?id="
+										+ response[it].idSubasta + "'" + '"';
+								bid.className += "d-flex flex-row align-items-center justify-content-start";
+								var htmltext = "<li class='d-flex flex-row align-items-center justify-content-start'>"
+										+ "<div class='schedule_image'>"
+										+ "<img src='"+response[it].image+"' alt=''>"
+										+ "</div>"
+										+ "<div class='schedule_content'>"
+										+ "<div class='schedule_time'>"
+										+ left
+										+ " Horas transcurridas (FINALIZADA)</div>"
+										+ "<div class='schedule_title'>"
+										+ response[it].item.marca
+										+ " "
+										+ response[it].item.modelo
+										+ "</div>"
+										+ "<div class='schedule_info'>"
+										+ "<div>"
+										+ "Vendedor: <a>"
+										+ response[it].seller
+										+ "</a>"
+										+ "</div>"
+										+ "<div>"
+										+ "<button style=''position: absolute; right: 0;' class='btn btn-success loginFormElement' onclick="
+										+ onclictext
+										+ "> Visitar</button>"
+										+ "</div>"
+										+ "</div>"
+										+ "</div>"
+										+ "</li>";
 
+								var actual = document
+										.getElementById("listaSubastas").innerHTML;
+								actual += htmltext;
+								document.getElementById("listaSubastas").innerHTML = actual;
+							}
+							
 							if (left >= 0) {
 								var onclictext = '"location.href='
 										+ "'subastaspreview.html?id="
@@ -86,16 +124,19 @@ appuser = (function() {
 										+ response[it].item.modelo
 										+ "</div>"
 										+ "<div class='schedule_info'>"
+										+ "<div>"
 										+ "Vendedor: <a>"
 										+ response[it].seller
 										+ "</a>"
 										+ "</div>"
-										+ "</div>"
-										+
-
-										"<button style=''position: absolute; right: 0;' class='btn btn-success loginFormElement' onclick="
+										+ "<div>"
+										+ "<button style=''position: absolute; right: 0;' class='btn btn-success loginFormElement' onclick="
 										+ onclictext
-										+ "> Visitar</button></li>";
+										+ "> Visitar</button>"
+										+ "</div>"
+										+ "</div>"
+										+ "</div>"
+										+ "</li>";
 
 								var actual = document
 										.getElementById("listaSubastas").innerHTML;

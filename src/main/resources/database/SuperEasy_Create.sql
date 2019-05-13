@@ -62,7 +62,7 @@ CREATE TABLE Users (
     id_users int  NOT NULL,
     name varchar(50)  NOT NULL,
     email varchar(50)  NOT NULL unique,
-    phone int  NOT NULL,
+    phone varchar(20)  NOT NULL,
     jairitos int  NOT NULL,
     jairitosFavor int  NOT NULL,
     jairitosCongelados int  NOT NULL,

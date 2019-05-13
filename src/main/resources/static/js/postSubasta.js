@@ -91,6 +91,7 @@ postSubasta = (function() {
 
 				});
 				location.replace("subastaspreview.html?id="+UUIDS);
+				//location.reload();
 				
 			}else{
     			alert("debe estar logeado ");

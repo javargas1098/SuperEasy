@@ -79,7 +79,7 @@ var subasta=( function(){
     	},
     	updateValue:function(newValue){
     		var element= document.getElementById("actualValue");
-    		element.innerHTML = newValue;
+    		element.innerHTML = "$ "+newValue;
     	}
     }
 	

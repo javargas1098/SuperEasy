@@ -53,11 +53,12 @@ var subasta=( function(){
 			        			$.post("/superEasy/user/"+email+"/Congelados/"+newCongelados, {});
 			        			var newBid=new Ofertas(1,value,idsubasta,user);
 			        			stompClient.send("/app/"+idsubasta,{},JSON.stringify(newBid));
-			        			appuser.setJairitosSubasta();
+			        			
 			        			var loser=document.getElementById("actualWinner").textContent;
 			        			console.log(loser);
 			        			$.post("/superEasy/user/"+loser+"/addJairitos/"+x, {});
 			        			$.post("/superEasy/user/"+loser+"/subCongelados/"+x, {});
+			        			appuser.setJairitosSubasta();
 			        		}
 			        		else if(parseInt(json["jairitos"])<parseInt(value) && parseInt(value)>x){
 			        			alert("no dispone de los jairitos suficientes para ofertar \n " +

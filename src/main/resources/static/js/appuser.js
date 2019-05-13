@@ -41,6 +41,7 @@ appuser = (function() {
 				document.getElementById('NuevoProducto').innerHTML = "";
 				document.getElementById('jairitosfavor').style.display="none";
 				document.getElementById('jairitoscongelados').style.display="none";
+				document.getElementById('botoncharge').style.display="none";
 			}
 		},
 		getUserCredential : function() {

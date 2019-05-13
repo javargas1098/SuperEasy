@@ -32,21 +32,47 @@ var subasta=( function(){
     		
     	},
     	ofertar:function(value){
-    		
-    		if(window.localStorage.getItem('key')!=null){
-    			var x = parseInt(document.getElementById("actualValue").textContent);
-        		if(value>x){
-        			var newBid=new Ofertas(1,value,idsubasta,user);
-        			stompClient.send("/app/"+idsubasta,{},JSON.stringify(newBid));
-        			
-        		}
-        		else{
-        			alert("no se puede ofertar un valor menor");
-        		}
-    		}
-    		else{
-    			alert("debe estar logeado para ofertar");
-    		}
+    		var email=atob(window.localStorage.getItem('key')).split(":")[0];
+    		axios.get(
+					'/superEasy/user/'+email+".com")
+					.then(function(response) {
+						console.log(response.data);
+						var json = response.data;
+						if(window.localStorage.getItem('key')!=null){
+			    			var x = parseInt(document.getElementById("actualValue").textContent);
+			    			console.log(" actual: "+x+" oferta:"+value+"   dispone de:"+json["jairitos"]);
+			    			console.log(parseInt(value)>x);
+			    			console.log(parseInt(json["jairitos"])>parseInt(value));
+			    			console.log(parseInt(json["jairitos"])+"  "+parseInt(value));
+			        		if(parseInt(value)>x && parseInt(json["jairitos"])>=parseInt(value)){
+			        			var newJairitos=parseInt(json["jairitos"])-parseInt(value);
+			        			var newCongelados=parseInt(json["jairitosCongelados"])+parseInt(value);
+			        			console.log("nuevos jairitos"+newJairitos);
+			        			console.log("congelados jairitos"+newCongelados);
+			        			$.post("/superEasy/user/"+email+"/Jairitos/"+newJairitos, {});
+			        			$.post("/superEasy/user/"+email+"/Congelados/"+newCongelados, {});
+			        			var newBid=new Ofertas(1,value,idsubasta,user);
+			        			stompClient.send("/app/"+idsubasta,{},JSON.stringify(newBid));
+			        			appuser.setJairitosSubasta();
+			        			var loser=document.getElementById("actualWinner").textContent;
+			        			console.log(loser);
+			        			$.post("/superEasy/user/"+loser+"/addJairitos/"+x, {});
+			        			$.post("/superEasy/user/"+loser+"/subCongelados/"+x, {});
+			        		}
+			        		else if(parseInt(json["jairitos"])<parseInt(value) && parseInt(value)>x){
+			        			alert("no dispone de los jairitos suficientes para ofertar \n " +
+			        					"necesita: "+value+"  y dispone de: "+json["jairitos"]);
+			        		}
+			        		else{
+			        			
+			        			alert("no se puede ofertar un valor menor o igual a la oferta actual ");
+			        		}
+			    		}
+			    		else{
+			    			alert("debe estar logeado para ofertar");
+			    		}
+						
+					});
     		
     		
     	},

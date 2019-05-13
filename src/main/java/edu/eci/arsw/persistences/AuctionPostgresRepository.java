@@ -196,6 +196,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 //			config.setJdbcUrl(dbUrl);
 //			config.setUsername(dbUsername);
 //			config.setPassword(dbPassword);
+//			config.setMaximumPoolSize(2);
 //			return new HikariDataSource(config);
 //		}
 //	}
@@ -207,7 +208,9 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 		try (Connection connection = dataSource.getConnection()) {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
+			
 			rs.next();
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 			Auction auction = new Auction();
 			auction.setIdSubasta(rs.getString("id_subasta"));
 			auction.setHoraIni(new Timestamp(

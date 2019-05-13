@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.css.CSSStyleSheet;
 
 import javax.sql.DataSource;
 
@@ -132,6 +133,7 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Override
 	public User getUserByEmail(String email) throws SQLException {
+		
 		Statement stmt = null;
 		String query = "SELECT * FROM users WHERE email ='" + email + "';";
 		User user = new User();
@@ -203,8 +205,33 @@ public class UserPostgresRepository implements IUserRepository {
 			config.setJdbcUrl(dbUrl);
 			config.setUsername(dbUsername);
 			config.setPassword(dbPassword);
+			config.setMaximumPoolSize(2);
 			return new HikariDataSource(config);
 		}
+	}
+
+	@Override
+	public void updateJairitos(String email, int value) throws SQLException {
+		
+		String query = "update users set jairitos="+value+" where email='"+email+"';";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			 stmt.executeUpdate(query);
+			connection.close();
+		}
+		
+	}
+
+	@Override
+	public void updateCongelados(String email, int value) throws SQLException{
+		
+		String query = "update users set jairitoscongelados="+value+" where email='"+email+"';";
+		try (Connection connection = dataSource.getConnection()) {
+			Statement stmt = connection.createStatement();
+			 stmt.executeUpdate(query);
+			connection.close();
+		}
+		
 	}
 
 }

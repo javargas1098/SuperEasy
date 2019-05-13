@@ -67,6 +67,13 @@ var subastaConItem = (function() {
 						h3.innerHTML = json["precioActual"];
 						
 						// Valor Actual ---------------------------------------------------
+						// Ganador Actual ---------------------------------------------------
+						var h3 = document.getElementById("actualWinner");
+						console.log(json);
+						$("#actualWinner").empty();
+						h3.innerHTML = json["ganadorActual"];
+						
+						// Ganador Actual ---------------------------------------------------
 						
 						// Fecha Inicio ---------------------------------------------------
 						var h5 = document.getElementById("fechaInicio");

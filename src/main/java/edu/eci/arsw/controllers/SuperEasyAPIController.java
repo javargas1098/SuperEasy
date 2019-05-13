@@ -40,7 +40,60 @@ public class SuperEasyAPIController {
 		}
 
 	}
+	@RequestMapping(value = "user/{email}/Jairitos/{value}", method = RequestMethod.POST)
+	public ResponseEntity<?> UpdateJairitos(@PathVariable("email") String email,@PathVariable("value") Integer value) {
+		try {
+			userServices.updateJairitos(email,value);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
 
+		}
+
+	}
+	@RequestMapping(value = "user/{email}/addJairitos/{value}", method = RequestMethod.POST)
+	public ResponseEntity<?> addJairitos(@PathVariable("email") String email,@PathVariable("value") Integer value) {
+		try {
+			User u=userServices.get(email);
+			userServices.updateJairitos(email,u.getJairitos()+value);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
+		}
+
+	}
+	@RequestMapping(value = "user/{email}/subCongelados/{value}", method = RequestMethod.POST)
+	public ResponseEntity<?> subCongelados(@PathVariable("email") String email,@PathVariable("value") Integer value) {
+		try {
+			User u=userServices.get(email);
+			userServices.updateCongelados(email, u.getJairitosCongelados()-value);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
+		}
+
+	}
+	
+	@RequestMapping(value = "user/{email}/Congelados/{value}", method = RequestMethod.POST)
+	public ResponseEntity<?> UpdateCongelados(@PathVariable("email") String email,@PathVariable("value") Integer value) {
+		try {
+
+			
+			userServices.updateCongelados(email, value);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			Logger.getLogger(SuperEasyAPIController.class.getName()).log(Level.SEVERE, null, e);
+			return new ResponseEntity<>("error", HttpStatus.NOT_FOUND);
+
+		}
+
+	}
+	
 	@RequestMapping(value = "/saveItem", method = RequestMethod.POST)
 	public ResponseEntity<?> saveItem(@RequestBody Item item) {
 		try {
@@ -70,7 +123,6 @@ public class SuperEasyAPIController {
 	@RequestMapping(value = "/saveAuction/{id}", method = RequestMethod.POST)
 	public ResponseEntity<?> saveSubasta(@RequestBody Auction auction, @PathParam("id") String id) {
 		try {
-			System.out.println("//////////////////////////////////////////////////////////////////////");
 			auctionServices.create(auction);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		} catch (Exception e) {

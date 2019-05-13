@@ -20,7 +20,7 @@ apiUser = (function() {
 				callback(data);
 			});
 		},
-		getUserbyEmail: function(email,callback){
+		getUsernamebyEmail: function(email,callback){
 			$.get("superEasy/user/"+email+"/name",function(data){
 				console.log(data);
 				callback(data);
@@ -28,6 +28,13 @@ apiUser = (function() {
 		},
 		getAllSubastas: function(callback){
 			$.get("superEasy/auctions",function(data){
+				console.log(data);
+				callback(data);
+			});
+		},
+		getUserbyEmail: function(email,callback){
+			// si no funciona quitar el .com
+			$.get("superEasy/user/"+email+".com",function(data){
 				console.log(data);
 				callback(data);
 			});

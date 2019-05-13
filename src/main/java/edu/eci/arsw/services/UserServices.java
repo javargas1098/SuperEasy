@@ -57,4 +57,18 @@ public class UserServices implements IUserServices {
 		userRepository.update(user);
 	}
 
+	@Override
+	public void updateJairitos(String email, int value) throws SQLException {
+		
+		userRepository.updateJairitos(email, value);
+		
+	}
+
+	@Override
+	public void updateCongelados(String email, int value) throws SQLException {
+		
+		userRepository.updateCongelados(email, value);
+		
+	}
+
 }

@@ -18,5 +18,7 @@ public interface IUserServices {
     void deleteUser(User user);
     void removeUser(String email);
 	void updateUser(User user);
+	void updateJairitos(String email,int value) throws SQLException;
+	void updateCongelados(String email,int value) throws SQLException;
 	
 }

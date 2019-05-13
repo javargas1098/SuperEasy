@@ -39,13 +39,28 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 	private String dbUsername;
 	@Value("${spring.datasource.password}")
 	private String dbPassword;
-
-	@Autowired
-	private DataSource dataSource;
 	
 	@Autowired
 	private IUserRepository UserPostgresRepository;
-
+	
+	private DataSource dataSource = UserPostgresRepository.getDataSource();
+	
+	
+	
+//	@Bean
+//	private DataSource dataSource() throws SQLException {
+//		if (dbUrl == null || dbUrl.isEmpty()) {
+//			return new HikariDataSource();
+//		} else {
+//			HikariConfig config = new HikariConfig();
+//			config.setJdbcUrl(dbUrl);
+//			config.setUsername(dbUsername);
+//			config.setPassword(dbPassword);
+//			config.setMaximumPoolSize(2);
+//			return new HikariDataSource(config);
+//		}
+//	}
+	
 	@Override
 	public List<Auction> findAll() throws SQLException {
 		System.out.println("////////////////////////////////////////////aquiiiii");
@@ -188,19 +203,7 @@ public class AuctionPostgresRepository implements IAuctionRepository {
 
 	}
 
-	@Bean
-	private DataSource dataSource() throws SQLException {
-		if (dbUrl == null || dbUrl.isEmpty()) {
-			return new HikariDataSource();
-		} else {
-			HikariConfig config = new HikariConfig();
-			config.setJdbcUrl(dbUrl);
-			config.setUsername(dbUsername);
-			config.setPassword(dbPassword);
-			config.setMaximumPoolSize(2);
-			return new HikariDataSource(config);
-		}
-	}
+
 
 	@Override
 	public Auction find(String id) {

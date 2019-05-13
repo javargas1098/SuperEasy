@@ -2,6 +2,8 @@ package edu.eci.arsw.persistences.repositories;
 
 import java.sql.SQLException;
 
+import javax.sql.DataSource;
+
 import org.springframework.stereotype.Repository;
 
 import edu.eci.arsw.model.User;
@@ -13,5 +15,6 @@ public interface IUserRepository extends DAO<User, Long>  {
 	User getUserById(long idUser) throws SQLException;
 	void updateJairitos(String email,int value) throws SQLException;
 	void updateCongelados(String email,int value) throws SQLException;
+	public DataSource getDataSource();
 
 }

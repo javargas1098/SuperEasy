@@ -36,6 +36,10 @@ public class UserPostgresRepository implements IUserRepository {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	public DataSource getDataSource() {
+		return dataSource;
+	}
 
 	@Override
 	public List<User> findAll() {
@@ -197,7 +201,7 @@ public class UserPostgresRepository implements IUserRepository {
 	}
 
 	@Bean
-	private DataSource dataSource() throws SQLException {
+	public DataSource dataSource() throws SQLException {
 		if (dbUrl == null || dbUrl.isEmpty()) {
 			return new HikariDataSource();
 		} else {

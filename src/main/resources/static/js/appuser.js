@@ -77,8 +77,7 @@ appuser = (function() {
 										+ "</div>"
 										+ "<div class='schedule_content'>"
 										+ "<div class='schedule_time'>"
-										+ left
-										+ " Horas transcurridas (FINALIZADA)</div>"
+										+ "(FINALIZADA)</div>"
 										+ "<div class='schedule_title'>"
 										+ response[it].item.marca
 										+ " "
@@ -105,7 +104,7 @@ appuser = (function() {
 								document.getElementById("listaSubastas").innerHTML = actual;
 							}
 							
-							if (left >= 0) {
+							else {
 								var onclictext = '"location.href='
 										+ "'subastaspreview.html?id="
 										+ response[it].idSubasta + "'" + '"';

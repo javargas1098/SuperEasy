@@ -23,7 +23,6 @@ public class RepositoryDataBase {
 	private String dbPassword;
 	
 	
-	
 	@Bean
 	public DataSource dataSource() throws SQLException {
 		if (dbUrl == null || dbUrl.isEmpty()) {

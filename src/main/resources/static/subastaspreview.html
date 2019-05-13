@@ -13,21 +13,24 @@
 <!------ Include the above in your HEAD tag ---------->
 
 
-    <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+<link href="https://nightly.datatables.net/css/jquery.dataTables.css"
+	rel="stylesheet" type="text/css" />
 
 
 
 </head>
-<body onLoad="subastaConItem.llenar(); subasta.init();appuser.setJairitosSubasta()">
+<body
+	onLoad="subastaConItem.llenar(); subasta.init();appuser.setJairitosSubasta()">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="product-title">
 					<h2>SuperEasy</h2>
 					<h5>
-						<i class="fa fa-map-marker"></i> Escuela Colombiana de Ingeniería Julio Garavito
+						<i class="fa fa-map-marker"></i> Escuela Colombiana de Ingeniería
+						Julio Garavito
 					</h5>
-					<h3 id="ownjairitos"> mis jairitos:</h3>
+					<h3 id="ownjairitos">Jairitos Actules:</h3>
 					<hr>
 				</div>
 			</div>
@@ -39,16 +42,16 @@
 					<ol class="carousel-indicators">
 						<li data-target="#carouselExampleIndicators" data-slide-to="0"
 							class="active"></li>
-						
-						
+
+
 					</ol>
 					<div class="carousel-inner">
 						<div class="carousel-item active" id="imageSubasta">
 							<img class="d-block w-100" src="images/martillo.jpg"
 								alt="First slide">
 						</div>
-						
-						
+
+
 					</div>
 					<a class="carousel-control-prev" href="#carouselExampleIndicators"
 						role="button" data-slide="prev"> <span
@@ -77,14 +80,16 @@
 			</div>
 			<div class="col-md-4">
 				<p>
-
 				<div class="jumbotron jumbotron-fluid text-center">
 					<div class="container">
 						<h1 class="display-4">Fecha Inicio</h1>
 						<h4 id="fechaInicio"></h4>
 						<h1 class="display-4">Fecha Fin</h1>
 						<h4 id="fechaFin"></h4>
-						
+
+					</div>
+					<div id="countdownExample">
+						<div class="values"></div>
 					</div>
 
 				</div>
@@ -135,9 +140,9 @@
 					</div>
 				</div>
 			</div>
-<!-- 			<div class="col-md-4"> -->
-<!-- 				<h4>Customer Service : 011-45063800</h4> -->
-<!-- 			</div> -->
+			<!-- 			<div class="col-md-4"> -->
+			<!-- 				<h4>Customer Service : 011-45063800</h4> -->
+			<!-- 			</div> -->
 		</div>
 	</div>
 
@@ -147,12 +152,13 @@
 	<script src="/webjars/jquery/jquery.min.js"></script>
 	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
 	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-	
-	
+
+
 	<script src="js/jquery-3.3.1.min.js"></script>
-	    <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+	<script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
 	<script src="styles/bootstrap-4.1.2/bootstrap.min.js"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/src/easytimer.min.js"></script>
 	<script src="js/subastaConItem.js"></script>
 	<script src="js/subasta.js"></script>
 	<script src="js/apiUser.js"></script>

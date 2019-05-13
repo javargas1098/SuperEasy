@@ -24,8 +24,9 @@ postSubasta = (function() {
 	});
 	
 	// today = (yyyy + '/' + mm + '/' + dd + " " + hour + ':' + minutes);
-	// var horaFinal = new Date();
-
+	var today = new Date();
+	var horaFinal;
+	
 	
 	return {
 
@@ -50,8 +51,11 @@ postSubasta = (function() {
 			console.log(datasubasta);
 			console.log(UUIDS);
 			console.log(atob(window.localStorage.getItem('key')).split(":")[0]);
+			var offset = new Date($('#productfecha').val())-today;
+			console.log(offset)
 			
-			if (window.localStorage.getItem('key') != null) {
+			
+			if (window.localStorage.getItem('key') != null && offset > 0  ) {
 				
 				
 				console.info(datasubasta);
@@ -67,7 +71,7 @@ postSubasta = (function() {
 						alert('Se creo, ');
 					},
 					error : function() {				
-						alert("item creado exitodamente");
+						alert("Item creado exitodamente");
 						//location.reload();
 						// si se puede crear usuario pero tira esta alerta
 					}
@@ -84,17 +88,17 @@ postSubasta = (function() {
 						alert('Se creo, ');
 					},
 					error : function() {				
-						alert("subasta creada exitosamente");
+						alert("Subasta creada exitosamente");
+						location.replace("subastaspreview.html?id="+UUIDS);
 						//location.reload();
 						// si se puede crear usuario pero tira esta alerta
 					}
 
 				});
-				location.replace("subastaspreview.html?id="+UUIDS);
-				//location.reload();
+				
 				
 			}else{
-    			alert("debe estar logeado ");
+    			alert("Debe estar logeado o ingreso una fecha inadecuada ");
     		};
     		
 		},

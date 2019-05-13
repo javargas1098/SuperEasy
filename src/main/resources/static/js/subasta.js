@@ -1,4 +1,4 @@
-var subasta=( function(){
+	var subasta=( function(){
 	class Ofertas{
 		constructor(ofertaID,precio,auction,user){
 			this.ofertaID=ofertaID;
@@ -12,7 +12,7 @@ var subasta=( function(){
 	var idsubasta=window.location.href.split("=")[1];
 	var user=atob(window.localStorage.getItem('key')).split(":")[0];
 	var ConnectAndSubscribe = function (idsubasta,user) {  
-		//TODO pasar por el servidor (/app)
+		// TODO pasar por el servidor (/app)
 		var socket = new SockJS('/stompendpoint');
         stompClient = Stomp.over(socket);
         stompClient.connect({},function(frame){
@@ -38,12 +38,23 @@ var subasta=( function(){
 					.then(function(response) {
 						console.log(response.data);
 						var json = response.data;
+						var today=new Date();
+						var end=new Date(document.getElementById("fechaFin").textContent);
 						if(window.localStorage.getItem('key')!=null){
 			    			var x = parseInt(document.getElementById("actualValue").textContent.split(" ")[1]);
 			    			console.log(" actual: "+x+" oferta:"+value+"   dispone de:"+json["jairitos"]);
 			    			console.log(parseInt(value)>x);
 			    			console.log(parseInt(json["jairitos"])>parseInt(value));
 			    			console.log(parseInt(json["jairitos"])+"  "+parseInt(value));
+			    			var offsetMillis = end - today;
+			    			console.log(offsetMillis);
+			    			setTimeout(sendWinner, offsetMillis);
+			    				
+			    			function sendWinner() {
+			    				  alert("gano "+$('#actualWinner').text());
+			    				  
+			    				}
+
 			        		if(parseInt(value)>x && parseInt(json["jairitos"])>=parseInt(value)){
 			        			var newJairitos=parseInt(json["jairitos"])-parseInt(value);
 			        			var newCongelados=parseInt(json["jairitosCongelados"])+parseInt(value);

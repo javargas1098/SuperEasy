@@ -22,6 +22,14 @@
                 subasta.updateValue(newValue.precio);
                 var element= document.getElementById("actualWinner");
         		element.innerHTML = newValue.user;
+        		console.log($("#actualWinner").text());
+        		Swal.fire({
+        			  title: $("#actualWinner").text()+' ¡Superó la última oferta!',
+        			  animation: false,
+        			  customClass: {
+        			    popup: 'animated tada'
+        			  }
+        			})
             });
         });
     };
@@ -66,7 +74,7 @@
 			        			stompClient.send("/app/"+idsubasta,{},JSON.stringify(newBid));
 			        			
 			        			var loser=document.getElementById("actualWinner").textContent;
-			        			console.log(loser);
+//			        			console.log(loser);
 			        			$.post("/superEasy/user/"+loser+"/addJairitos/"+x, {});
 			        			$.post("/superEasy/user/"+loser+"/subCongelados/"+x, {});
 			        			appuser.setJairitosSubasta();

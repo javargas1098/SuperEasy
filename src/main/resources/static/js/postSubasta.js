@@ -5,8 +5,8 @@ postSubasta = (function() {
 	var yyyy = today.getFullYear();
 	var hour = String(today.getHours()).padStart(2, '0');
 	var minutes = String(today.getMinutes());
-	var UUID,UUIDS;
-	
+	var UUID, UUIDS;
+
 	var UUIDJSON2 = $.ajax({
 		url : "https://helloacm.com/api/guid-generator/",
 
@@ -22,12 +22,15 @@ postSubasta = (function() {
 			UUID = data.guid[0];
 		}
 	});
-	
+
 	// today = (yyyy + '/' + mm + '/' + dd + " " + hour + ':' + minutes);
 	var today = new Date();
 	var horaFinal;
-	
-	
+	function changePage() {
+		location.replace("subastaspreview.html?id=" + UUIDS);
+		  
+		}
+
 	return {
 
 		postItem : function() {
@@ -45,19 +48,17 @@ postSubasta = (function() {
 				horaIni : today,
 				item : data,
 				idSubasta : UUIDS,
-				image:$("#productimage").val()
+				image : $("#productimage").val()
 
 			};
 			console.log(datasubasta);
 			console.log(UUIDS);
 			console.log(atob(window.localStorage.getItem('key')).split(":")[0]);
-			var offset = new Date($('#productfecha').val())-today;
+			var offset = new Date($('#productfecha').val()) - today;
 			console.log(offset)
-			
-			
-			if (window.localStorage.getItem('key') != null && offset > 0  ) {
-				
-				
+
+			if (window.localStorage.getItem('key') != null && offset > 0) {
+
 				console.info(datasubasta);
 				// console.info(horaFin);
 				$.ajax({
@@ -70,9 +71,16 @@ postSubasta = (function() {
 
 						alert('Se creo, ');
 					},
-					error : function() {				
-						alert("Item creado exitodamente");
-						//location.reload();
+					error : function() {
+						// alert("Item creado exitodamente");
+						// Swal.fire({
+						// position: 'top-end',
+						// type: 'success',
+						// title: 'Item creado exitodamente',
+						// showConfirmButton: false,
+						// timer: 1500
+						// })
+						// location.reload();
 						// si se puede crear usuario pero tira esta alerta
 					}
 
@@ -80,32 +88,42 @@ postSubasta = (function() {
 				$.ajax({
 					method : "POST",
 					contentType : "application/json",
-					url : "superEasy/saveAuction/"+UUIDS,
+					url : "superEasy/saveAuction/" + UUIDS,
 					data : JSON.stringify(datasubasta),
 					dataType : 'json',
 					success : function(data) {
 
 						alert('Se creo, ');
 					},
-					error : function() {				
-						alert("Subasta creada exitosamente");
-						location.replace("subastaspreview.html?id="+UUIDS);
-						//location.reload();
+					error : function() {
+						// alert("Subasta creada exitosamente");
+						Swal.fire({
+							position : 'top-end',
+							type : 'success',
+							title : 'Subasta creada exitosamente',
+							showConfirmButton : false,
+							timer : 1500,
+						})
+						var off=1500;
+						setTimeout(changePage, off);
+						
+
+						// location.reload();
 						// si se puede crear usuario pero tira esta alerta
 					}
 
 				});
-				
-				
-			}else{
-    			alert("Debe estar logeado o ingreso una fecha inadecuada ");
-    		};
-    		
+
+				// location.replace("subastaspreview.html?id="+UUIDS);
+
+			} else {
+				alert("Debe estar logeado o ingreso una fecha inadecuada ");
+			}
+			;
+
 		},
-		possibleNew:function(){
-			
-			
-			
+		possibleNew : function() {
+
 		}
 
 	}

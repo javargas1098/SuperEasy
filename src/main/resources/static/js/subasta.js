@@ -60,7 +60,8 @@
 			    				
 			    			function sendWinner() {
 			    				  alert("gano "+$('#actualWinner').text());
-			    				  
+			    				  var winner=document.getElementById("actualWinner").textContent;
+			    				  $.post("/superEasy/user/"+winner+"/subCongelados/"+x, {});
 			    				}
 
 			        		if(parseInt(value)>x && parseInt(json["jairitos"])>=parseInt(value)){
